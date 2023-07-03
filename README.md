@@ -16,8 +16,9 @@ BookingsDotCom is a single-page application that enables users to book accommoda
 - Node.js: JavaScript runtime environment.
 - MySQL: Database management system for storing application data.
 - Sequelize: Object-Relational Mapping (ORM) library for interacting with the database.
+- JsonWebToken(JWT): for stateless authentication and authorization.
 - Express.js: Web framework for handling routing and server-side logic.
-- HTML, CSS, JavaScript: Frontend development languages for building the user interface.
+- HTML, TailWind CSS styling, JavaScript: Frontend development languages for building the user interface.
 - React: JavaScript library for building interactive UI components.
 
 ## Contributors
