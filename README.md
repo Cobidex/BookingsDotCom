@@ -20,13 +20,6 @@ BookingsDotCom is a single-page application that enables users to book accommoda
 - HTML, CSS, JavaScript: Frontend development languages for building the user interface.
 - React: JavaScript library for building interactive UI components.
 
-## Installation
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/your-username/BookingsDotCom.git
-
 ## Contributors
 
 ### Backend:
@@ -37,3 +30,9 @@ git clone https://github.com/your-username/BookingsDotCom.git
 - Chima Kingsley Nnachi
 - Tawfiq Muhammed Idrisa
 
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-username/BookingsDotCom.git
