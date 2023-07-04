@@ -6,9 +6,9 @@ const password = process.env.BDC_PASSWORD;
 const host = process.DB_HOST || 'localhost';
 
 
-const dbConnect = new Sequelize(dbName, username, password, {
+const sequelize = new Sequelize(dbName, username, password, {
   host,
   dialect: 'mysql',
 });
 
-module.exports = dbConnect;
+module.exports = sequelize;
