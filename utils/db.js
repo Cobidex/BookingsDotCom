@@ -9,6 +9,7 @@ const host = process.DB_HOST || 'localhost';
 const sequelize = new Sequelize(dbName, username, password, {
   host,
   dialect: 'mysql',
+  logging: false,
 });
 
 module.exports = sequelize;
