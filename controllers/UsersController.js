@@ -1,20 +1,19 @@
+const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const sequelize = require('../utils/db');
-const bcrypt = require('bcrypt');
 
-function hashPassword {
-  bcrypt.hash(password, 10, (err, hash) => {
-    if (err) {
-      console.log('Error hashing password:', err);
-      return null;
-    } else {
-      return hash;
-    }
-  });
+async function hashPassword(password) {
+  try {
+    const hash = await bcrypt.hash(password, 10);
+    return hash;
+  } catch (error) {
+    console.log('Error hashing password:', err);
+    return null;
+  }
 }
 
 class UsersController {
-  static async addNew(req, res) {
+  static async postNew(req, res) {
     const { firstName, lastName, email, password, phoneNumber } = req.body;
     if (!firstName) {
       return res.status(400).send({ error: 'Missing firstName' });
@@ -42,10 +41,12 @@ class UsersController {
     const newUser = { firstName, lastName, email, password: hash, phoneNumber };
     try {
       const createdUser = await User.create(newUser);
-      return res.status(200).send({ Name: user.getName, id: user.id });
+      return res.status(200).send({ Name: createdUser.getName(), id: createdUser.id });
     } catch (error) {
       console.log('error writing to database', error);
       return null
     }
   }
 }
+
+module.exports = UsersController;
