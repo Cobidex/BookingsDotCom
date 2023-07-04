@@ -36,4 +36,4 @@ BookingsDotCom is a single-page application that enables users to book accommoda
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/BookingsDotCom.git
+git clone https://github.com/Cobidex/BookingsDotCom.git
