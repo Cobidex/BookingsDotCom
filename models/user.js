@@ -39,6 +39,6 @@ User.init({
 
 (async () => {
   await User.sync();
-});
+})();
 
 module.exports = User;
