@@ -2,43 +2,53 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../utils/db');
 
 class User extends Model {
-  getName {
+  getName() {
     return `${this.firstName} ${this.lastName}`;
   }
 }
 
-User.init({
-  id: {
-    type: DataTypes.UUIDV4,
-    primaryKey: true
+User.init(
+  {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+      allowNull: false,
+    },
+    firstName: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    lastName: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING(255),
+      allowNull: false
+    },
+    password: {
+      type: DataTypes.STRING(255),
+      allowNull: false
+    },
+    phoneNumber: {
+      type: DataTypes.STRING(20),
+      allowNull: false,
+    },
   },
-  firstName: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  lastName: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  phoneNumber: {
-    type: DataTypes.STRING,
-    allowNull: false
+  {
+    sequelize,
+    modelName: 'User',
+    tableName: 'Users',
   }
-}, {
-  sequelize,
-  modelName: 'Users'
-});
+);
 
 (async () => {
-  await User.sync();
+  try {
+    await User.sync();
+  } catch (error) {
+    console.log('Error creating table', error);
+  }
 })();
 
 module.exports = User;
