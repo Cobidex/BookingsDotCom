@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
+const City = require('./city');
 
 class Accommodation extends Model { }
 
@@ -30,6 +31,10 @@ Accommodation.init(
         cityId: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            references: {
+                model: City,
+                key: 'id',
+            },
         },
         rating: {
             type: DataTypes.DECIMAL(3, 1),
@@ -41,5 +46,13 @@ Accommodation.init(
         tableName: 'Accommodation',
     }
 );
+
+(async () => {
+    try {
+        await Accommodation.sync();
+    } catch (error) {
+        console.log('Error creating table', error);
+    }
+})();
 
 module.exports = Accommodation;
