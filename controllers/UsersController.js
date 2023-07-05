@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
+const AuthController = require('./AuthController');
 const sequelize = require('../utils/db');
 
 async function hashPassword(password) {
@@ -34,10 +35,12 @@ class UsersController {
     if (user) {
       return res.status(400).send({ error: 'Email Already exists' });
     }
+
     const hash = await hashPassword(password);
     if (!hash) {
       return res.status(501).send({ error: 'internal Server error' });
     }
+
     const newUser = { firstName, lastName, email, password: hash, phoneNumber };
     try {
       const createdUser = await User.create(newUser);
@@ -46,6 +49,18 @@ class UsersController {
       console.log('error writing to database', error);
       return null
     }
+  }
+
+  static async loginUser(req, res) {
+    const { email, password } = req.body;
+    const hash = await hashPassword(password);
+    const user = await User.findOne({ where: { email, password: hash } });
+    if (!user) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+    const payload = { email, password: hash };
+    const token = AuthController.createToken(payload, res);
+    return res.status(200).json({ message: 'logged in successful' });
   }
 }
 
