@@ -1,8 +1,8 @@
 const Accommodation = require('../models/accommodation');
+const City = require('../models/city');
 
 const createAccommodation = async (req, res) => {
     try {
-        // Extract data from the request body
         const {
             name,
             description,
@@ -13,7 +13,12 @@ const createAccommodation = async (req, res) => {
             rating
         } = req.body;
 
-        // Create a new accommodation object
+        // Check if the city exists
+        const city = await City.findByPk(cityId);
+        if (!city) {
+            return res.status(404).json({ error: 'City not found' });
+        }
+
         const newAccommodation = {
             name,
             description,
@@ -24,37 +29,17 @@ const createAccommodation = async (req, res) => {
             rating
         };
 
-        // Insert the new accommodation into the database using the Accommodation model
         const createdAccommodation = await Accommodation.create(newAccommodation);
 
-        // Return the created accommodation in the response
         res.status(201).json(createdAccommodation);
     } catch (error) {
-        // Handle any errors that occur during the insertion process
         res.status(500).json({ error: 'Failed to create accommodation' });
     }
 };
 
-const formatAccommodationForDisplay = (accommodation) => {
-    const formattedAccommodation = {
-        id: accommodation.id,
-        name: accommodation.name,
-        description: accommodation.description,
-        pricePerNight: accommodation.pricePerNight,
-        type: accommodation.type,
-        availableDates: accommodation.availableDates.split(','),
-        cityId: accommodation.cityId,
-        rating: accommodation.rating,
-    };
-
-    return formattedAccommodation;
-};
-
 const updateAccommodation = async (req, res) => {
     try {
-        const { id } = req.params; // Extract the accommodation ID from the request parameters
-
-        // Extract the updated data from the request body
+        const { id } = req.params;
         const {
             name,
             description,
@@ -65,15 +50,17 @@ const updateAccommodation = async (req, res) => {
             rating
         } = req.body;
 
-        // Find the accommodation by ID
         const accommodation = await Accommodation.findByPk(id);
-
-        // Check if the accommodation exists
         if (!accommodation) {
             return res.status(404).json({ error: 'Accommodation not found' });
         }
 
-        // Update the accommodation with the new data
+        // Check if the city exists
+        const city = await City.findByPk(cityId);
+        if (!city) {
+            return res.status(404).json({ error: 'City not found' });
+        }
+
         accommodation.name = name;
         accommodation.description = description;
         accommodation.pricePerNight = pricePerNight;
@@ -82,36 +69,27 @@ const updateAccommodation = async (req, res) => {
         accommodation.cityId = cityId;
         accommodation.rating = rating;
 
-        // Save the updated accommodation
         await accommodation.save();
 
-        // Return the updated accommodation in the response
         res.json(accommodation);
     } catch (error) {
-        // Handle any errors that occur during the update process
         res.status(500).json({ error: 'Failed to update accommodation' });
     }
 };
 
 const deleteAccommodation = async (req, res) => {
     try {
-        const { id } = req.params; // Extract the accommodation ID from the request parameters
+        const { id } = req.params;
 
-        // Find the accommodation by ID
         const accommodation = await Accommodation.findByPk(id);
-
-        // Check if the accommodation exists
         if (!accommodation) {
             return res.status(404).json({ error: 'Accommodation not found' });
         }
 
-        // Delete the accommodation
         await accommodation.destroy();
 
-        // Return a success message in the response
         res.json({ message: 'Accommodation deleted successfully' });
     } catch (error) {
-        // Handle any errors that occur during the deletion process
         res.status(500).json({ error: 'Failed to delete accommodation' });
     }
 };
@@ -120,13 +98,13 @@ const searchAccommodations = async (req, res) => {
     try {
         const { location, type, price } = req.query;
 
-        // Build the search query based on the provided criteria
         const searchQuery = {
             where: {},
+            include: [City], // Include the City model for retrieving city details
         };
 
         if (location) {
-            searchQuery.where.location = location;
+            searchQuery.where['$City.name$'] = location;
         }
 
         if (type) {
@@ -137,24 +115,16 @@ const searchAccommodations = async (req, res) => {
             searchQuery.where.pricePerNight = price;
         }
 
-        // Fetch the matching accommodations from the database
         const accommodations = await Accommodation.findAll(searchQuery);
 
-        // Format the accommodations for display
-        const formattedAccommodations = accommodations.map(formatAccommodationForDisplay);
-
-        // Return the search results in the response
-        res.json(formattedAccommodations);
+        res.json(accommodations);
     } catch (error) {
-        // Handle any errors that occur during the search process
         res.status(500).json({ error: 'Failed to search accommodations' });
     }
 };
 
-
 module.exports = {
     createAccommodation,
-    formatAccommodationForDisplay,
     updateAccommodation,
     deleteAccommodation,
     searchAccommodations,
