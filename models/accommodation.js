@@ -38,7 +38,7 @@ Accommodation.init(
     {
         sequelize,
         modelName: 'Accommodation',
-        timestamps: false,
+        tableName: 'Accommodation',
     }
 );
 
