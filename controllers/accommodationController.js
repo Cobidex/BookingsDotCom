@@ -116,9 +116,46 @@ const deleteAccommodation = async (req, res) => {
     }
 };
 
+const searchAccommodations = async (req, res) => {
+    try {
+        const { location, type, price } = req.query;
+
+        // Build the search query based on the provided criteria
+        const searchQuery = {
+            where: {},
+        };
+
+        if (location) {
+            searchQuery.where.location = location;
+        }
+
+        if (type) {
+            searchQuery.where.type = type;
+        }
+
+        if (price) {
+            searchQuery.where.pricePerNight = price;
+        }
+
+        // Fetch the matching accommodations from the database
+        const accommodations = await Accommodation.findAll(searchQuery);
+
+        // Format the accommodations for display
+        const formattedAccommodations = accommodations.map(formatAccommodationForDisplay);
+
+        // Return the search results in the response
+        res.json(formattedAccommodations);
+    } catch (error) {
+        // Handle any errors that occur during the search process
+        res.status(500).json({ error: 'Failed to search accommodations' });
+    }
+};
+
+
 module.exports = {
     createAccommodation,
     formatAccommodationForDisplay,
     updateAccommodation,
     deleteAccommodation,
+    searchAccommodations,
 };
