@@ -3,39 +3,42 @@ const City = require('../models/city');
 
 const createAccommodation = async (req, res) => {
     try {
+        // Extract data from the request body
         const {
             name,
             description,
             pricePerNight,
             type,
             availableDates,
-            cityId,
+            city,
             rating
         } = req.body;
 
-        // Check if the city exists
-        const city = await City.findByPk(cityId);
-        if (!city) {
-            return res.status(404).json({ error: 'City not found' });
-        }
+        // Create a new city
+        const createdCity = await City.create(city);
 
+        // Create a new accommodation object with the associated cityId
         const newAccommodation = {
             name,
             description,
             pricePerNight,
             type,
             availableDates,
-            cityId,
+            cityId: createdCity.id, // Assign the newly created city's ID as the cityId for the accommodation
             rating
         };
 
+        // Insert the new accommodation into the database using the Accommodation model
         const createdAccommodation = await Accommodation.create(newAccommodation);
 
+        // Return the created accommodation in the response
         res.status(201).json(createdAccommodation);
     } catch (error) {
+        // Handle any errors that occur during the insertion process
         res.status(500).json({ error: 'Failed to create accommodation' });
     }
 };
+
 
 const updateAccommodation = async (req, res) => {
     try {
