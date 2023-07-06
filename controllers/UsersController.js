@@ -63,42 +63,51 @@ class UsersController {
 
   static async loginUser(req, res) {
     const { email, password } = req.body;
-    const user = await User.findOne({ where: { email } });
-    if (!user) {
-      return res.status(401).json({ error: 'User not found' });
-    }
+
     try {
+      const user = await User.findOne({ where: { email } });
+
+      if (!user) {
+        return res.status(401).json({ error: 'User not found' });
+      }
+    
       const match = await comparePasswords(Password, user.password);
       if (!match) {
         return res.status(401).json({ error: 'Unauthorized' });
       }
+
       const payload = { email, userId: user.id };
       const token = AuthController.createToken(payload, res);
+
       return res.status(200).json({ id: user.id });
+
     } catch (error) {
-      console.log(error);
+      console.log('error with user login', error);
       return res.status(501).json({ error: 'Internal Server error' });
     }
   }
 
   static async getUserProfile(req, res) {
     const userId = req.user.userId;
+
     try {
       const user = await User.findByPk(userId);
+
       return res.status(200).json({
         id: user.id,
         name: user.getName(),
         email: user.email,
         phone: user.phoneNumber,
       });
+
     } catch (error) {
-      console.log(error)
+      console.log('error getting user profile details', error);
       return res.status(501).json({ error: 'internal server error' });
     }
   }
 
-  static async putUserProfile(req, res) {
-    userId = req.user.userId;
+  static async putUser(req, res) {
+    const userId = req.user.userId;
     try {
       const user = await User.findByPk(userId);
 
@@ -116,8 +125,24 @@ class UsersController {
       });
 
       return res.status(200).json({ updatedUser });
+
     } catch (error) {
-      console.log(error)
+      console.log('error updating user details', error)
+      return res.status(501).json({ error: 'internal server error' });
+    }
+  }
+
+  static async deleteUser(req, res) {
+    const userId = req.user.userId;
+    try {
+      const rowsDeleted = await User.destroy({
+        where: { id: userId }
+      });
+
+      return res.status(200).send('User deleted successfully');
+
+    } catch (error) {
+      console.log('error deleting user', error);
       return res.status(501).json({ error: 'internal server error' });
     }
   }
