@@ -13,6 +13,16 @@ async function hashPassword(password) {
   }
 }
 
+
+async function comparePasswords(plainPassword, hashedPassword) {
+  try {
+    const match = await bcrypt.compare(plainPassword, hashedPassword);
+    return match;
+  } catch (error) {
+    throw error;
+  }
+}
+
 class UsersController {
   static async postNew(req, res) {
     const { firstName, lastName, email, password, phoneNumber } = req.body;
@@ -53,14 +63,21 @@ class UsersController {
 
   static async loginUser(req, res) {
     const { email, password } = req.body;
-    const hash = await hashPassword(password);
-    const user = await User.findOne({ where: { email, password: hash } });
+    const user = await User.findOne({ where: { email } });
     if (!user) {
-      return res.status(401).json({ error: 'Unauthorized' });
+      return res.status(401).json({ error: 'User not found' });
     }
-    const payload = { email, password: hash };
-    const token = AuthController.createToken(payload, res);
-    return res.status(200).json({ id: user.id });
+    try {
+      const match = await comparePasswords(Password, user.password);
+      if (!match) {
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+      const payload = { email, userId: user.id };
+      const token = AuthController.createToken(payload, res);
+      return res.status(200).json({ id: user.id });
+    } catch (error) {
+      return res.status(501).json({ error: 'Internal Server error' });
+    }
   }
 }
 
