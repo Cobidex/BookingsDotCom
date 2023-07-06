@@ -18,6 +18,18 @@ const createBooking = async (req, res) => {
             return res.status(404).json({ error: 'Accommodation not found' });
         }
 
+        // Check if the accommodation is already booked for the specified dates
+        const existingBooking = await Booking.findOne({
+            where: {
+                accomo_id: accommodationId,
+                checkIn: { [Op.lte]: checkOut },
+                checkOut: { [Op.gte]: checkIn },
+            },
+        });
+        if (existingBooking) {
+            return res.status(409).json({ error: 'Accommodation is already booked for the specified dates' });
+        }
+
         // Create a new booking
         const booking = await Booking.create({
             checkIn,
@@ -33,7 +45,6 @@ const createBooking = async (req, res) => {
         res.status(500).json({ error: 'Failed to create booking' });
     }
 };
-
 
 module.exports = {
     createBooking,
