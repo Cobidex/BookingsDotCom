@@ -60,7 +60,7 @@ class UsersController {
     }
     const payload = { email, password: hash };
     const token = AuthController.createToken(payload, res);
-    return res.status(200).json({ message: 'logged in successful' });
+    return res.status(200).json({ id: user.id });
   }
 }
 
