@@ -16,6 +16,7 @@ BookingsDotCom is a single-page application that enables users to book accommoda
 - Node.js: JavaScript runtime environment.
 - MySQL: Database management system for storing application data.
 - Sequelize: Object-Relational Mapping (ORM) library for interacting with the database.
+- bcrypt: hashing module to securely hash user password for enhanced security.
 - JsonWebToken(JWT): for stateless authentication and authorization.
 - Express.js: Web framework for handling routing and server-side logic.
 - HTML, TailWind CSS styling, JavaScript: Frontend development languages for building the user interface.
@@ -31,9 +32,14 @@ BookingsDotCom is a single-page application that enables users to book accommoda
 - Chima Kingsley Nnachi
 - Tawfiq Muhammed Idrisa
 
-## Installation
+## Contribution
 
 1. Clone the repository:
 
 ```bash
 git clone https://github.com/Cobidex/BookingsDotCom.git
+```
+
+2. Submit a pull request
+
+3. Await pull request approval
