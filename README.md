@@ -30,7 +30,7 @@ BookingsDotCom is a single-page application that enables users to book accommoda
 
 ### Frontend:
 - Chima Kingsley Nnachi
-- Tawfiq Muhammed Idrisa
+- Mohammed Tawfiq Iddrisu
 
 ## Contribution
 
