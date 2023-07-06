@@ -76,7 +76,49 @@ class UsersController {
       const token = AuthController.createToken(payload, res);
       return res.status(200).json({ id: user.id });
     } catch (error) {
+      console.log(error);
       return res.status(501).json({ error: 'Internal Server error' });
+    }
+  }
+
+  static async getUserProfile(req, res) {
+    const userId = req.user.userId;
+    try {
+      const user = await User.findByPk(userId);
+      return res.status(200).json({
+        id: user.id,
+        name: user.getName(),
+        email: user.email,
+        phone: user.phoneNumber,
+      });
+    } catch (error) {
+      console.log(error)
+      return res.status(501).json({ error: 'internal server error' });
+    }
+  }
+
+  static async putUserProfile(req, res) {
+    userId = req.user.userId;
+    try {
+      const user = await User.findByPk(userId);
+
+      const updateField = {};
+      Object.keys(req.body).forEach((key) => {
+        if (req.body[key]) {
+          updateFields[key] = req.body[key];
+	}
+      });
+
+      const [rows, [updatedUser]] = await User.update(updateFields, {
+        where: { id: userId },
+        returning: true,
+        attributes: { exclude: ['password'] }
+      });
+
+      return res.status(200).json({ updatedUser });
+    } catch (error) {
+      console.log(error)
+      return res.status(501).json({ error: 'internal server error' });
     }
   }
 }
