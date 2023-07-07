@@ -12,6 +12,7 @@ const routes = express.Router();
 routes.post('/users', UsersController.postNew);
 routes.post('/users/login', UsersController.loginUser);
 routes.get('/users/:id', AuthController.verifyToken, UsersController.getUserProfile);
+routes.get('/users/count', AuthController.verifyToken, UsersController.countUser);
 routes.put('/users/:id', AuthController.verifyToken, UsersController.putUser);
 routes.delete('/users/:id', AuthController.verifyToken, UsersController.deleteUser);
 routes.put('/accommodations/:id', AuthController.verifyToken, updateAccommodation);
