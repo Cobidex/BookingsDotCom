@@ -25,7 +25,7 @@ async function comparePasswords(plainPassword, hashedPassword) {
 
 class UsersController {
   static async postNew(req, res) {
-    const { firstName, lastName, email, password, phoneNumber } = req.body;
+    const { firstName, lastName, email, password, phoneNumber, isAdmin } = req.body;
     if (!firstName) {
       return res.status(400).send({ error: 'Missing firstName' });
     }
@@ -46,12 +46,26 @@ class UsersController {
       return res.status(400).send({ error: 'Email Already exists' });
     }
 
+    if (isAdmin) {
+      if (!req.user.admin) {
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
+    }
+
     const hash = await hashPassword(password);
     if (!hash) {
       return res.status(501).send({ error: 'internal Server error' });
     }
 
-    const newUser = { firstName, lastName, email, password: hash, phoneNumber };
+    const newUser = {
+      firstName,
+      lastName,
+      email,
+      password: hash,
+      phoneNumber,
+      isAdmin
+    };
+
     try {
       const createdUser = await User.create(newUser);
       return res.status(200).send({ Name: createdUser.getName(), id: createdUser.id });
@@ -76,7 +90,8 @@ class UsersController {
         return res.status(401).json({ error: 'Unauthorized' });
       }
 
-      const payload = { email, userId: user.id };
+      const admin = user.isAdmin;
+      const payload = { admin, userId: user.id };
       const token = AuthController.createToken(payload, res);
 
       return res.status(200).json({ id: user.id });
