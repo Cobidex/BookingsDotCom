@@ -46,18 +46,12 @@ class UsersController {
       return res.status(400).send({ error: 'Email Already exists' });
     }
 
-    if (isAdmin) {
-      if (!req.user.admin) {
-        return res.status(401).json({ error: 'Unauthorized' });
-      }
-    }
-
     const hash = await hashPassword(password);
     if (!hash) {
       return res.status(501).send({ error: 'internal Server error' });
     }
 
-    const newUser = {
+    iconst newUser = {
       firstName,
       lastName,
       email,
@@ -103,17 +97,23 @@ class UsersController {
   }
 
   static async getUserProfile(req, res) {
-    const userId = req.user.userId;
+    const userId = req.params.userId;
+    const admin = req.user.admin;
 
     try {
-      const user = await User.findByPk(userId);
+      if (admin || userId === req.user.userId) {
+        const user = await User.findByPk(userId);
 
-      return res.status(200).json({
-        id: user.id,
-        name: user.getName(),
-        email: user.email,
-        phone: user.phoneNumber,
-      });
+        return res.status(200).json({
+          id: user.id,
+          name: user.getName(),
+          email: user.email,
+          phone: user.phoneNumber,
+          isAdmin: user.isAdmin,
+        });
+      } else {
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
 
     } catch (error) {
       console.log('error getting user profile details', error);
@@ -122,24 +122,29 @@ class UsersController {
   }
 
   static async putUser(req, res) {
-    const userId = req.user.userId;
+    const userId = req.params.userId;
+    const admin = req.user.admin;
     try {
-      const user = await User.findByPk(userId);
+      if (admin || userId === req.user.userId) {
+        const user = await User.findByPk(userId);
 
-      const updateField = {};
-      Object.keys(req.body).forEach((key) => {
-        if (req.body[key]) {
-          updateFields[key] = req.body[key];
-	}
-      });
+        const updateField = {};
+        Object.keys(req.body).forEach((key) => {
+          if (req.body[key]) {
+            updateFields[key] = req.body[key];
+	  }
+        });
 
-      const [rows, [updatedUser]] = await User.update(updateFields, {
-        where: { id: userId },
-        returning: true,
-        attributes: { exclude: ['password'] }
-      });
+        const [rows, [updatedUser]] = await User.update(updateFields, {
+          where: { id: userId },
+          returning: true,
+          attributes: { exclude: ['password'] }
+        });
 
-      return res.status(200).json({ updatedUser });
+        return res.status(200).json({ updatedUser });
+      } else {
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
 
     } catch (error) {
       console.log('error updating user details', error)
@@ -148,13 +153,18 @@ class UsersController {
   }
 
   static async deleteUser(req, res) {
-    const userId = req.user.userId;
+    const admin = req.user.admin;
+    const userId = req.params;
     try {
-      const rowsDeleted = await User.destroy({
-        where: { id: userId }
-      });
+      if (admin || userId === req.user.userId) {
+        await User.destroy({
+          where: { id: userId }
+        });
 
-      return res.status(200).send('User deleted successfully');
+        return res.status(200).send('User deleted successfully');
+      } else {
+        return res.status(401).send({ error: 'Unauthorized' });
+      }
 
     } catch (error) {
       console.log('error deleting user', error);
