@@ -1,5 +1,5 @@
 {
-  "name": "bookingsdotcom",
+  "name": "BookingsDotCom",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,6 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "express": "^4.17.1",
+    "sequelize": "^6.6.2",
+    "mysql2": "^2.3.0",
+    "bcrypt": "^5.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "cookie-parser": "^1.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -24,3 +30,4 @@
     "vite": "^4.4.2"
   }
 }
+
