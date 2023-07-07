@@ -92,7 +92,7 @@ class UsersController {
 
     } catch (error) {
       console.log('error with user login', error);
-      return res.status(501).json({ error: 'Internal Server error' });
+      return res.status(500).json({ error: 'Internal Server error' });
     }
   }
 
@@ -117,7 +117,7 @@ class UsersController {
 
     } catch (error) {
       console.log('error getting user profile details', error);
-      return res.status(501).json({ error: 'internal server error' });
+      return res.status(500).json({ error: 'internal server error' });
     }
   }
 
@@ -148,7 +148,7 @@ class UsersController {
 
     } catch (error) {
       console.log('error updating user details', error)
-      return res.status(501).json({ error: 'internal server error' });
+      return res.status(500).json({ error: 'internal server error' });
     }
   }
 
@@ -168,7 +168,22 @@ class UsersController {
 
     } catch (error) {
       console.log('error deleting user', error);
-      return res.status(501).json({ error: 'internal server error' });
+      return res.status(500).json({ error: 'internal server error' });
+    }
+  }
+
+  static async countUser(req, res) {
+    const admin = req.user.admin;
+    if (admin) {
+      try {
+        const count = await User.count();
+        res.json({ count });
+      } catch (error) {
+        console.log('error retrieving user count', error);
+        res.status(500).json({ error: 'internal server error' });
+      }
+    } else {
+      res.status(401).json({ error: 'Unauthorized' });
     }
   }
 }
