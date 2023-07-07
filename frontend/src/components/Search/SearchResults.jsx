@@ -14,7 +14,7 @@ const SearchResults = ({ results }) => {
               <h3>{result.name}</h3>
               <p>Location: {result.location}</p>
               <p>Type: {result.type}</p>
-              <p>Price: {result.price}</p>
+              <p>Price: {result.pricePerNight}</p>
             </li>
           ))}
         </ul>
