@@ -9,7 +9,7 @@ const accommodationSearch = () => {
         try {
             // make API call to fetch accommodation data based on search criteria
             const response = await fetch('accommodation search endpoint', {
-                method: 'POST',
+                method: 'GET',
                 header: {
                     'content-Type': 'application/json',
                 },
