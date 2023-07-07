@@ -51,7 +51,7 @@ class UsersController {
       return res.status(501).send({ error: 'internal Server error' });
     }
 
-    iconst newUser = {
+    const newUser = {
       firstName,
       lastName,
       email,
