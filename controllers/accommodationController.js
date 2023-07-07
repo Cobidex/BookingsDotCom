@@ -3,6 +3,8 @@ const City = require('../models/city');
 
 const createAccommodation = async (req, res) => {
     try {
+      const admin = req.user.admin;
+      if (admin) {
         // Extract data from the request body
         const {
             name,
@@ -33,6 +35,9 @@ const createAccommodation = async (req, res) => {
 
         // Return the created accommodation in the response
         res.status(201).json(createdAccommodation);
+      } else {
+        res.status(401).json({ error: 'Unauthorized' });
+      }
     } catch (error) {
         // Handle any errors that occur during the insertion process
         res.status(500).json({ error: 'Failed to create accommodation' });
@@ -43,38 +48,43 @@ const createAccommodation = async (req, res) => {
 const updateAccommodation = async (req, res) => {
     try {
         const { id } = req.params;
-        const {
-            name,
-            description,
-            pricePerNight,
-            type,
-            availableDates,
-            cityId,
-            rating
-        } = req.body;
+        const admin = req.user.admin;
+        if (admin) {
+          const {
+              name,
+              description,
+              pricePerNight,
+              type,
+              availableDates,
+              cityId,
+              rating
+          } = req.body;
 
-        const accommodation = await Accommodation.findByPk(id);
-        if (!accommodation) {
-            return res.status(404).json({ error: 'Accommodation not found' });
-        }
+          const accommodation = await Accommodation.findByPk(id);
+          if (!accommodation) {
+              return res.status(404).json({ error: 'Accommodation not found' });
+          }
 
-        // Check if the city exists
-        const city = await City.findByPk(cityId);
-        if (!city) {
-            return res.status(404).json({ error: 'City not found' });
-        }
+          // Check if the city exists
+          const city = await City.findByPk(cityId);
+          if (!city) {
+              return res.status(404).json({ error: 'City not found' });
+          }
 
-        accommodation.name = name;
-        accommodation.description = description;
-        accommodation.pricePerNight = pricePerNight;
-        accommodation.type = type;
-        accommodation.availableDates = availableDates;
-        accommodation.cityId = cityId;
-        accommodation.rating = rating;
+          accommodation.name = name;
+          accommodation.description = description;
+          accommodation.pricePerNight = pricePerNight;
+          accommodation.type = type;
+          accommodation.availableDates = availableDates;
+          accommodation.cityId = cityId;
+          accommodation.rating = rating;
 
-        await accommodation.save();
+          await accommodation.save();
 
-        res.json(accommodation);
+          res.json(accommodation);
+	} else {
+          res.status(401).json({ error: 'Unauthorized' });
+	}
     } catch (error) {
         res.status(500).json({ error: 'Failed to update accommodation' });
     }
@@ -83,15 +93,20 @@ const updateAccommodation = async (req, res) => {
 const deleteAccommodation = async (req, res) => {
     try {
         const { id } = req.params;
+        const admin = req.user.admin;
 
-        const accommodation = await Accommodation.findByPk(id);
-        if (!accommodation) {
-            return res.status(404).json({ error: 'Accommodation not found' });
-        }
+        if (admin) {
+          const accommodation = await Accommodation.findByPk(id);
+          if (!accommodation) {
+              return res.status(404).json({ error: 'Accommodation not found' });
+          }
 
-        await accommodation.destroy();
+          await accommodation.destroy();
 
-        res.json({ message: 'Accommodation deleted successfully' });
+          res.json({ message: 'Accommodation deleted successfully' });
+	} else {
+          return res.status(401).json({ error: 'Unauthorized' });
+	}
     } catch (error) {
         res.status(500).json({ error: 'Failed to delete accommodation' });
     }
