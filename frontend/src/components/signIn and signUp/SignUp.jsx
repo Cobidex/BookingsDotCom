@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 const SignUp = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
 
   // access history object
   const history = useHistory();
@@ -30,26 +30,26 @@ const SignUp = () => {
 	  password,
 	  phoneNumber
 	}),
-      });
+      })
 
       // here handles success response
       if (response.ok) {
         // display success message or redirect to the login page
-        setSuccess('Registration successful!');
-        setError('');
+        setSuccess('Registration successful!')
+        setError('')
 
         // redirect to log inn page after successful sign up
-        history.push('/login');
+        history.push('/login')
       } else {
         // display error message
-        const errorData = await response.json();
-        setError(errorData.message);
-        setSuccess('');
+        const errorData = await response.json()
+        setError(errorData.message)
+        setSuccess('')
       }
     } catch (error) {
       // handle network or other errors
-      setError('An error occurred. Please try again.');
-      setSuccess('');
+      setError('An error occurred. Please try again.')
+      setSuccess('')
     }
   };
 
@@ -69,7 +69,7 @@ const SignUp = () => {
         <button type="submit">Sign Up</button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default SignUp;
+export default SignUp
