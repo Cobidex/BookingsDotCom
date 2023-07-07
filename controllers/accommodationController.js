@@ -114,7 +114,7 @@ const deleteAccommodation = async (req, res) => {
 
 const searchAccommodations = async (req, res) => {
     try {
-        const { location, type, price } = req.query;
+        const { location, accommodationType, priceRange } = req.body;
 
         const searchQuery = {
             where: {},
@@ -126,11 +126,11 @@ const searchAccommodations = async (req, res) => {
         }
 
         if (type) {
-            searchQuery.where.type = type;
+            searchQuery.where.type = accommodationType;
         }
 
         if (price) {
-            searchQuery.where.pricePerNight = price;
+            searchQuery.where.pricePerNight = priceRange;
         }
 
         const accommodations = await Accommodation.findAll(searchQuery);
