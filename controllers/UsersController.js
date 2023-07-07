@@ -97,15 +97,15 @@ class UsersController {
   }
 
   static async getUserProfile(req, res) {
-    const userId = req.params.userId;
+    const { id } = req.params;
     const admin = req.user.admin;
 
     try {
-      if (admin || userId === req.user.userId) {
-        const user = await User.findByPk(userId);
+      if (admin || id === req.user.userId) {
+        const user = await User.findByPk(id);
 
         return res.status(200).json({
-          id: user.id,
+          id,
           name: user.getName(),
           email: user.email,
           phone: user.phoneNumber,
@@ -122,11 +122,11 @@ class UsersController {
   }
 
   static async putUser(req, res) {
-    const userId = req.params.userId;
+    const { id } = req.params;
     const admin = req.user.admin;
     try {
-      if (admin || userId === req.user.userId) {
-        const user = await User.findByPk(userId);
+      if (admin || id === req.user.userId) {
+        const user = await User.findByPk(id);
 
         const updateField = {};
         Object.keys(req.body).forEach((key) => {
@@ -136,7 +136,7 @@ class UsersController {
         });
 
         const [rows, [updatedUser]] = await User.update(updateFields, {
-          where: { id: userId },
+          where: { id },
           returning: true,
           attributes: { exclude: ['password'] }
         });
@@ -154,11 +154,11 @@ class UsersController {
 
   static async deleteUser(req, res) {
     const admin = req.user.admin;
-    const userId = req.params;
+    const { id } = req.params;
     try {
-      if (admin || userId === req.user.userId) {
+      if (admin || id === req.user.userId) {
         await User.destroy({
-          where: { id: userId }
+          where: { id }
         });
 
         return res.status(200).send('User deleted successfully');
