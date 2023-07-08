@@ -42,7 +42,6 @@ const createAccommodation = async (req, res) => {
     }
 };
 
-
 const updateAccommodation = async (req, res) => {
     try {
         const { id } = req.params;
@@ -129,9 +128,30 @@ const searchAccommodations = async (req, res) => {
     }
 };
 
+const getAccommodationsCount = async (req, res) => {
+    try {
+        const count = await Accommodation.count();
+        res.json({ count });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch accommodations count' });
+    }
+};
+
+const getAccommodationsCountByCity = async (req, res) => {
+    try {
+        const { cityId } = req.params;
+        const count = await Accommodation.count({ where: { cityId } });
+        res.json({ count });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch accommodations count by city' });
+    }
+};
+
 module.exports = {
     createAccommodation,
     updateAccommodation,
     deleteAccommodation,
     searchAccommodations,
+    getAccommodationsCount,
+    getAccommodationsCountByCity,
 };
