@@ -15,6 +15,7 @@ Review.init(
         date: {
             type: DataTypes.DATE,
             allowNull: false,
+            defaultValue: DataTypes.NOW,
         },
         user_id: {
             type: DataTypes.UUID,
@@ -22,6 +23,10 @@ Review.init(
         },
         accomo_id: {
             type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        text: {
+            type: DataTypes.STRING,
             allowNull: false,
         },
     },
@@ -32,7 +37,7 @@ Review.init(
     }
 );
 
-// Define associations
+
 Review.belongsTo(User, { foreignKey: 'user_id' });
 Review.belongsTo(Accommodation, { foreignKey: 'accomo_id' });
 
