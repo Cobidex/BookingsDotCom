@@ -4,7 +4,7 @@ const Accommodation = require('../models/accommodation');
 
 const createReview = async (req, res) => {
     try {
-        const { user_id, accomo_id, text } = req.body;
+        const { user_id, accomo_id, rating, text } = req.body;
 
         // Check if the user exists
         const user = await User.findByPk(user_id);
@@ -19,7 +19,14 @@ const createReview = async (req, res) => {
         }
 
         // Create a new review
-        const review = await Review.create({ user_id, accomo_id, text });
+        const review = await Review.create({ user_id, accomo_id, rating, text });
+
+        // Update the accommodation's rating
+        const reviews = await Review.findAll({ where: { accomo_id } });
+        const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+        const averageRating = totalRating / reviews.length;
+        accommodation.rating = averageRating;
+        await accommodation.save();
 
         // Return the created review in the response
         res.status(201).json(review);
