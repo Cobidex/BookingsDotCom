@@ -29,6 +29,14 @@ Review.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        rating: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            validate: {
+                min: 1,
+                max: 5,
+            },
+        },
     },
     {
         sequelize,
@@ -37,7 +45,6 @@ Review.init(
         timestamps: true,
     }
 );
-
 
 Review.belongsTo(User, { foreignKey: 'user_id' });
 Review.belongsTo(Accommodation, { foreignKey: 'accomo_id' });
