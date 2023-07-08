@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const SignIn = () => {
   const [email, setEmail] = useState('')
@@ -7,7 +7,7 @@ const SignIn = () => {
   const [error, setError] = useState('')
 
   // access history object
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const handleSignIn = async (e) => {
     e.preventDefault()
@@ -23,7 +23,7 @@ const SignIn = () => {
 
       if (response.ok){
         // redirect to dashboard after successful login
-        history.push('/dashboard')
+        navigate.push('/dashboard')
       } else {
         const errorData = await response.json()
         setError(errorData.message)

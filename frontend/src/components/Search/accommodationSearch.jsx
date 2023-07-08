@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import SearchForm from "./SearchForm"
 import SearchResults from "./SearchResults"
 
-const accommodationSearch = () => {
+const AccommodationSearch = () => {
     const [SearchResults, setSearchResults] = useState([])
 
     const handleSearch = async (searchCriteria) => {
