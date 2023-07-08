@@ -3,6 +3,7 @@ const userRoutes = require('./routes/userRoutes');
 const accommodationRoutes = require('./routes/accommodationRoutes');
 const bookingRoutes = require('./routes/bookingRoutes');
 const cityRoutes = require('./routes/cityRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
 
 
 
@@ -14,6 +15,7 @@ app.use('/users', userRoutes);
 app.use('/accommodations', accommodationRoutes);
 app.use('/booking', bookingRoutes);
 app.use('/cities', cityRoutes);
+app.use('/reviews', reviewRoutes);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
