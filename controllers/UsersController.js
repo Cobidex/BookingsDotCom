@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const { body, validationResult } = require('express-validator');
 const User = require('../models/user');
 const AuthController = require('./AuthController');
 const sequelize = require('../utils/db');
@@ -25,10 +26,27 @@ async function comparePasswords(plainPassword, hashedPassword) {
 
 class UsersController {
   static async postNew(req, res) {
-    const { firstName, lastName, email, password, phoneNumber, isAdmin } = req.body;
-    if (!firstName || !lastName || !email || !password || !phoneNumber) {
-      return res.status(400).send({ error: 'Missing required fields' });
+    // Validate user inputs
+    await body('firstName').notEmpty().trim().escape().run(req);
+    await body('lastName').notEmpty().trim().escape().run(req);
+    await body('email').notEmpty().isEmail().normalizeEmail().run(req);
+    await body('password').notEmpty().isLength({ min: 8 }).run(req);
+    await body('phoneNumber').notEmpty().isMobilePhone().run(req);
+
+    // Check for validation errors
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+      return res.status(400).json({ errors: validationErrors.array() });
     }
+
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      phoneNumber,
+      isAdmin
+    } = req.body;
 
     try {
       const user = await User.findOne({ where: { email } });
@@ -59,6 +77,7 @@ class UsersController {
   }
 
   static async loginUser(req, res) {
+
     const { email, password } = req.body;
 
     try {
@@ -113,6 +132,7 @@ class UsersController {
   static async putUser(req, res) {
     const { id } = req.params;
     const admin = req.user.admin;
+
     try {
       if (admin || id === req.user.userId) {
         const user = await User.findByPk(id);
