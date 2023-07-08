@@ -3,8 +3,6 @@ const City = require('../models/city');
 
 const createAccommodation = async (req, res) => {
     try {
-      const admin = req.user.admin;
-      if (admin) {
         // Extract data from the request body
         const {
             name,
@@ -16,8 +14,11 @@ const createAccommodation = async (req, res) => {
             rating
         } = req.body;
 
-        // Create a new city
-        const createdCity = await City.create(city);
+        // Check if the city exists
+        const existingCity = await City.findByPk(city.id);
+        if (!existingCity) {
+            return res.status(404).json({ error: 'City not found' });
+        }
 
         // Create a new accommodation object with the associated cityId
         const newAccommodation = {
@@ -26,7 +27,7 @@ const createAccommodation = async (req, res) => {
             pricePerNight,
             type,
             availableDates,
-            cityId: createdCity.id, // Assign the newly created city's ID as the cityId for the accommodation
+            cityId: existingCity.id, // Assign the existing city's ID as the cityId for the accommodation
             rating
         };
 
@@ -35,9 +36,6 @@ const createAccommodation = async (req, res) => {
 
         // Return the created accommodation in the response
         res.status(201).json(createdAccommodation);
-      } else {
-        res.status(401).json({ error: 'Unauthorized' });
-      }
     } catch (error) {
         // Handle any errors that occur during the insertion process
         res.status(500).json({ error: 'Failed to create accommodation' });
@@ -48,43 +46,38 @@ const createAccommodation = async (req, res) => {
 const updateAccommodation = async (req, res) => {
     try {
         const { id } = req.params;
-        const admin = req.user.admin;
-        if (admin) {
-          const {
-              name,
-              description,
-              pricePerNight,
-              type,
-              availableDates,
-              cityId,
-              rating
-          } = req.body;
+        const {
+            name,
+            description,
+            pricePerNight,
+            type,
+            availableDates,
+            city,
+            rating
+        } = req.body;
 
-          const accommodation = await Accommodation.findByPk(id);
-          if (!accommodation) {
-              return res.status(404).json({ error: 'Accommodation not found' });
-          }
+        const accommodation = await Accommodation.findByPk(id);
+        if (!accommodation) {
+            return res.status(404).json({ error: 'Accommodation not found' });
+        }
 
-          // Check if the city exists
-          const city = await City.findByPk(cityId);
-          if (!city) {
-              return res.status(404).json({ error: 'City not found' });
-          }
+        // Check if the city exists
+        const existingCity = await City.findByPk(city.id);
+        if (!existingCity) {
+            return res.status(404).json({ error: 'City not found' });
+        }
 
-          accommodation.name = name;
-          accommodation.description = description;
-          accommodation.pricePerNight = pricePerNight;
-          accommodation.type = type;
-          accommodation.availableDates = availableDates;
-          accommodation.cityId = cityId;
-          accommodation.rating = rating;
+        accommodation.name = name;
+        accommodation.description = description;
+        accommodation.pricePerNight = pricePerNight;
+        accommodation.type = type;
+        accommodation.availableDates = availableDates;
+        accommodation.cityId = existingCity.id; // Assign the existing city's ID as the cityId for the accommodation
+        accommodation.rating = rating;
 
-          await accommodation.save();
+        await accommodation.save();
 
-          res.json(accommodation);
-	} else {
-          res.status(401).json({ error: 'Unauthorized' });
-	}
+        res.json(accommodation);
     } catch (error) {
         res.status(500).json({ error: 'Failed to update accommodation' });
     }
@@ -93,20 +86,15 @@ const updateAccommodation = async (req, res) => {
 const deleteAccommodation = async (req, res) => {
     try {
         const { id } = req.params;
-        const admin = req.user.admin;
 
-        if (admin) {
-          const accommodation = await Accommodation.findByPk(id);
-          if (!accommodation) {
-              return res.status(404).json({ error: 'Accommodation not found' });
-          }
+        const accommodation = await Accommodation.findByPk(id);
+        if (!accommodation) {
+            return res.status(404).json({ error: 'Accommodation not found' });
+        }
 
-          await accommodation.destroy();
+        await accommodation.destroy();
 
-          res.json({ message: 'Accommodation deleted successfully' });
-	} else {
-          return res.status(401).json({ error: 'Unauthorized' });
-	}
+        res.json({ message: 'Accommodation deleted successfully' });
     } catch (error) {
         res.status(500).json({ error: 'Failed to delete accommodation' });
     }
@@ -114,7 +102,7 @@ const deleteAccommodation = async (req, res) => {
 
 const searchAccommodations = async (req, res) => {
     try {
-        const { location, accommodationType, priceRange } = req.body;
+        const { location, type, price } = req.query;
 
         const searchQuery = {
             where: {},
@@ -126,11 +114,11 @@ const searchAccommodations = async (req, res) => {
         }
 
         if (type) {
-            searchQuery.where.type = accommodationType;
+            searchQuery.where.type = type;
         }
 
         if (price) {
-            searchQuery.where.pricePerNight = priceRange;
+            searchQuery.where.pricePerNight = price;
         }
 
         const accommodations = await Accommodation.findAll(searchQuery);
