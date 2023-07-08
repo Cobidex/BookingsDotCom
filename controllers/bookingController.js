@@ -38,7 +38,6 @@ const createBooking = async (req, res) => {
             accomo_id: accommodationId,
         });
 
-
         // Return the created booking in the response
         res.status(201).json(booking);
     } catch (error) {
@@ -47,6 +46,26 @@ const createBooking = async (req, res) => {
     }
 };
 
+const cancelBooking = async (req, res) => {
+    try {
+        const { bookingId } = req.params;
+
+        // Find the booking
+        const booking = await Booking.findByPk(bookingId);
+        if (!booking) {
+            return res.status(404).json({ error: 'Booking not found' });
+        }
+
+        // Delete the booking
+        await booking.destroy();
+
+        res.json({ message: 'Booking cancelled successfully' });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to cancel booking' });
+    }
+};
+
 module.exports = {
     createBooking,
+    cancelBooking,
 };
