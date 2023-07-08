@@ -5,5 +5,6 @@ const router = express.Router();
 
 // Create a new booking
 router.post('/book', bookingController.createBooking);
+router.delete('/:id', bookingController.cancelBooking);
 
 module.exports = router;
