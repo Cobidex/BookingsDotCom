@@ -38,6 +38,7 @@ Accommodation.init(
         },
         rating: {
             type: DataTypes.DECIMAL(3, 1),
+            defaultValue: 0.0,
         },
     },
     {
