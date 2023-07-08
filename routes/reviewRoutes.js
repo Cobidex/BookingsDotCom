@@ -3,10 +3,10 @@ const reviewController = require('../controllers/reviewController');
 
 const router = express.Router();
 
-// POST /reviews
-router.post('/reviews', reviewController.createReview);
+// POST /reviews/create
+router.post('/create', reviewController.createReview);
 
-// GET /reviews/:accommodationId
-router.get('/reviews/:accommodationId', reviewController.getReviews);
+// GET /reviews/:id
+router.get('/:id', reviewController.getReviews);
 
 module.exports = router;
