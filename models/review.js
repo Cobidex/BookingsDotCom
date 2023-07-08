@@ -34,6 +34,7 @@ Review.init(
         sequelize,
         modelName: 'Review',
         tableName: 'Review',
+        timestamps: true,
     }
 );
 
