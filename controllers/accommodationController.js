@@ -11,7 +11,6 @@ const createAccommodation = async (req, res) => {
             type,
             availableDates,
             city,
-            rating
         } = req.body;
 
         // Check if the city exists
@@ -28,7 +27,6 @@ const createAccommodation = async (req, res) => {
             type,
             availableDates,
             cityId: existingCity.id, // Assign the existing city's ID as the cityId for the accommodation
-            rating
         };
 
         // Insert the new accommodation into the database using the Accommodation model
@@ -52,7 +50,6 @@ const updateAccommodation = async (req, res) => {
             type,
             availableDates,
             city,
-            rating
         } = req.body;
 
         const accommodation = await Accommodation.findByPk(id);
@@ -72,7 +69,6 @@ const updateAccommodation = async (req, res) => {
         accommodation.type = type;
         accommodation.availableDates = availableDates;
         accommodation.cityId = existingCity.id; // Assign the existing city's ID as the cityId for the accommodation
-        accommodation.rating = rating;
 
         await accommodation.save();
 
