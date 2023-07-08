@@ -9,6 +9,15 @@ const getCities = async (req, res) => {
     }
 };
 
+const getCityCount = async (req, res) => {
+    try {
+        const count = await City.count();
+        res.json({ count });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch city count' });
+    }
+};
+
 const createCity = async (req, res) => {
     try {
         const { name } = req.body;
