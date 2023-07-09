@@ -105,24 +105,17 @@ class UsersController {
   }
 
   static async getUserProfile(req, res) {
-    const { id } = req.params;
-    const admin = req.user.admin;
-
+    const id = req.user.userId;
     try {
-      if (admin || id === req.user.userId) {
-        const user = await User.findByPk(id);
+      const user = await User.findByPk(id);
 
-        return res.status(200).json({
-          id,
-          name: user.getName(),
-          email: user.email,
-          phone: user.phoneNumber,
-          isAdmin: user.isAdmin,
-        });
-      } else {
-        return res.status(401).json({ error: 'Unauthorized' });
-      }
-
+      return res.status(200).json({
+        id,
+        name: user.getName(),
+        email: user.email,
+        phone: user.phoneNumber,
+        isAdmin: user.isAdmin,
+      });
     } catch (error) {
       console.log('error getting user profile details', error);
       return res.status(500).json({ error: 'internal server error' });
@@ -130,30 +123,25 @@ class UsersController {
   }
 
   static async putUser(req, res) {
-    const { id } = req.params;
-    const admin = req.user.admin;
+    const id = req.user.userId;
 
     try {
-      if (admin || id === req.user.userId) {
-        const user = await User.findByPk(id);
+      const user = await User.findByPk(id);
 
-        const updateField = {};
-        Object.keys(req.body).forEach((key) => {
-          if (req.body[key]) {
-            updateFields[key] = req.body[key];
-	  }
-        });
+      const updateField = {};
+      Object.keys(req.body).forEach((key) => {
+        if (req.body[key]) {
+          updateFields[key] = req.body[key];
+        }
+      });
 
-        const [rows, [updatedUser]] = await User.update(updateFields, {
-          where: { id },
-          returning: true,
-          attributes: { exclude: ['password'] }
-        });
+      const [rows, [updatedUser]] = await User.update(updateFields, {
+        where: { id },
+        returning: true,
+        attributes: { exclude: ['password'] }
+      });
 
-        return res.status(200).json({ updatedUser });
-      } else {
-        return res.status(401).json({ error: 'Unauthorized' });
-      }
+      return res.status(200).json({ updatedUser });
 
     } catch (error) {
       console.log('error updating user details', error)
@@ -162,18 +150,13 @@ class UsersController {
   }
 
   static async deleteUser(req, res) {
-    const admin = req.user.admin;
-    const { id } = req.params;
+    const id = req.user.userId;
     try {
-      if (admin || id === req.user.userId) {
-        await User.destroy({
-          where: { id }
-        });
+      await User.destroy({
+        where: { id }
+      });
 
-        return res.status(200).send('User deleted successfully');
-      } else {
-        return res.status(401).send({ error: 'Unauthorized' });
-      }
+      return res.status(200).send('User deleted successfully');
 
     } catch (error) {
       console.log('error deleting user', error);
@@ -182,17 +165,12 @@ class UsersController {
   }
 
   static async countUser(req, res) {
-    const admin = req.user.admin;
-    if (admin) {
-      try {
-        const count = await User.count();
-        res.json({ count });
-      } catch (error) {
-        console.log('error retrieving user count', error);
-        res.status(500).json({ error: 'internal server error' });
-      }
-    } else {
-      res.status(401).json({ error: 'Unauthorized' });
+    try {
+      const count = await User.count();
+      res.json({ count });
+    } catch (error) {
+      console.log('error retrieving user count', error);
+      res.status(500).json({ error: 'internal server error' });
     }
   }
 }
