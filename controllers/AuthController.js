@@ -9,7 +9,7 @@ class AuthController {
     return token;
   }
 
-  static async verifyToken(req, res, next) {
+  static async verifyUser(req, res, next) {
     const token = req.cookies.token;
     if (!token) {
       return res.status(401).json({ error: 'Unauthorized' });
@@ -20,6 +20,26 @@ class AuthController {
       req.user = decoded;
 
       next();
+    } catch (err) {
+      return res.status(401).json({ error: 'Invalid token' });
+    }
+  }
+
+  static async verifyAdmin(req, res, next) {
+    const token = req.cookies.token;
+    if (!token) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    try {
+      const decoded = jwt.verify(token, secretKey);
+      const admin = decoded.admin;
+
+      if (admin) {
+        next();
+      } else {
+        return res.status(401).json({ error: 'Unauthorized' });
+      }
     } catch (err) {
       return res.status(401).json({ error: 'Invalid token' });
     }
