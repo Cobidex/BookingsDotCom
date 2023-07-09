@@ -1,8 +1,8 @@
-const bcrypt = require('bcrypt');
-const { body, validationResult } = require('express-validator');
-const User = require('../models/user');
-const AuthController = require('./AuthController');
-const sequelize = require('../utils/db');
+import bcrypt from 'bcrypt';
+import { body, validationResult } from 'express-validator';
+import User from '../models/user.js';
+import AuthController from './AuthController.js';
+import sequelize from '../utils/db.js';
 
 async function hashPassword(password) {
   try {
@@ -87,16 +87,17 @@ class UsersController {
         return res.status(401).json({ error: 'User not found' });
       }
     
-      const match = await comparePasswords(Password, user.password);
+      const match = await comparePasswords(password, user.password);
       if (!match) {
         return res.status(401).json({ error: 'Unauthorized' });
       }
 
       const admin = user.isAdmin;
       const payload = { admin, userId: user.id };
-      const token = AuthController.createToken(payload, res);
+      const token = await AuthController.createToken(payload);
+      res.cookie('token', token, { httpOnly: true, secure: true });
 
-      return res.status(200).json({ id: user.id });
+      return res.status(200).json(user.toJson());
 
     } catch (error) {
       console.log('error with user login', error);
@@ -109,13 +110,7 @@ class UsersController {
     try {
       const user = await User.findByPk(id);
 
-      return res.status(200).json({
-        id,
-        name: user.getName(),
-        email: user.email,
-        phone: user.phoneNumber,
-        isAdmin: user.isAdmin,
-      });
+      return res.status(200).json(user.toJson());
     } catch (error) {
       console.log('error getting user profile details', error);
       return res.status(500).json({ error: 'internal server error' });
@@ -128,20 +123,27 @@ class UsersController {
     try {
       const user = await User.findByPk(id);
 
-      const updateField = {};
-      Object.keys(req.body).forEach((key) => {
-        if (req.body[key]) {
-          updateFields[key] = req.body[key];
-        }
-      });
+      const {
+        firstName,
+        lastName,
+        email,
+        phoneNumber
+      } = req.body;
 
-      const [rows, [updatedUser]] = await User.update(updateFields, {
-        where: { id },
-        returning: true,
-        attributes: { exclude: ['password'] }
-      });
-
-      return res.status(200).json({ updatedUser });
+      if (firstName) {
+        user.firstName = firstName;
+      }
+      if (lastName) {
+        user.lastName = lastName;
+      }
+      if (email) {
+        user.email = email;
+      }
+      if (phoneNumber) {
+        user.phoneNumber = phoneNumber;
+      }
+      await user.save();
+      res.status(200).json(user.toJson());
 
     } catch (error) {
       console.log('error updating user details', error)
@@ -152,11 +154,14 @@ class UsersController {
   static async deleteUser(req, res) {
     const id = req.user.userId;
     try {
-      await User.destroy({
-        where: { id }
-      });
+      const user = await User.findByPk(id);
 
-      return res.status(200).send('User deleted successfully');
+      if (user) {
+        user.destroy();
+        res.status(200).send('User deleted successfully');
+      } else {
+        res.status(404).json({ error: 'User not found' });
+      }
 
     } catch (error) {
       console.log('error deleting user', error);
@@ -175,4 +180,4 @@ class UsersController {
   }
 }
 
-module.exports = UsersController;
+export default UsersController;

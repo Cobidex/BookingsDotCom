@@ -1,11 +1,10 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
-const secretKey = process.env.SECRET_KEY;
+const secretKey = process.env.BDC_SECRET_KEY;
 
 class AuthController {
   static async createToken(payload, res) {
-    const token = jwt.sign(payload, secretKey, { expiresIn: '1h' });
-    res.cookie('token', token, { httpOnly: true, secure: true });
+    const token = await jwt.sign(payload, secretKey, { expiresIn: '1h' });
     return token;
   }
 
@@ -46,4 +45,4 @@ class AuthController {
   }
 }
 
-module.exports = AuthController;
+export default AuthController;

@@ -1,7 +1,7 @@
-const { DataTypes, Model } = require('sequelize');
-const sequelize = require('../utils/db');
-const User = require('./user');
-const Accommodation = require('./accommodation');
+import { DataTypes, Model } from 'sequelize';
+import sequelize from '../utils/db.js';
+import User from './user.js';
+import Accommodation from './accommodation.js';
 
 class Review extends Model { }
 
@@ -49,4 +49,12 @@ Review.init(
 Review.belongsTo(User, { foreignKey: 'user_id' });
 Review.belongsTo(Accommodation, { foreignKey: 'accomo_id' });
 
-module.exports = Review;
+(async () => {
+  try {
+    await Review.sync();
+  } catch (error) {
+    console.log('Error creating table', error);
+  }
+})();
+
+export default Review;

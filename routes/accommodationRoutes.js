@@ -1,7 +1,7 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const accommodationController = require('../controllers/accommodationController');
-const AuthController = require('../controllers/AuthController');
+import accommodationController from '../controllers/accommodationController.js';
+import AuthController from '../controllers/AuthController.js';
 
 
 router.post('/create', AuthController.verifyAdmin, accommodationController.createAccommodation);
@@ -9,4 +9,4 @@ router.put('/:id', AuthController.verifyAdmin, accommodationController.updateAcc
 router.delete('/:id', AuthController.verifyAdmin, accommodationController.deleteAccommodation);
 router.get('/search', accommodationController.searchAccommodations);
 
-module.exports = router;
+export default router;

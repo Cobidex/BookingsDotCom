@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+import Sequelize from 'sequelize';
 
 const dbName = process.env.BDC_DBNAME;
 const username = process.env.BDC_USERNAME;
@@ -12,4 +12,4 @@ const sequelize = new Sequelize(dbName, username, password, {
   logging: false,
 });
 
-module.exports = sequelize;
+export default sequelize;

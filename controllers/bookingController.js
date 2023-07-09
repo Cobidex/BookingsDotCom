@@ -1,6 +1,6 @@
-const Booking = require('../models/booking');
-const User = require('../models/user');
-const Accommodation = require('../models/accommodation');
+import Booking from '../models/booking.js';
+import User from '../models/user.js';
+import Accommodation from '../models/accommodation.js';
 
 const createBooking = async (req, res) => {
   const userId = req.user.userId
@@ -70,7 +70,7 @@ const cancelBooking = async (req, res) => {
   }
 };
 
-module.exports = {
+export default {
   createBooking,
   cancelBooking,
 };

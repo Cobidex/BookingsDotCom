@@ -1,6 +1,6 @@
-const express = require('express');
-const reviewController = require('../controllers/reviewController');
-const AuthController = require('../controllers/AuthController');
+import express from 'express';
+import reviewController from '../controllers/reviewController.js';
+import AuthController from '../controllers/AuthController.js';
 
 const router = express.Router();
 
@@ -10,4 +10,4 @@ router.post('/create', AuthController.verifyUser, reviewController.createReview)
 // GET /reviews/:id
 router.get('/:id', reviewController.getReviews);
 
-module.exports = router;
+export default router;

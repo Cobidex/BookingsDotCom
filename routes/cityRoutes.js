@@ -1,6 +1,6 @@
-const express = require('express');
-const cityController = require('../controllers/cityController');
-const AuthController = require('../controllers/AuthController');
+import express from 'express';
+import cityController from '../controllers/cityController.js';
+import AuthController from '../controllers/AuthController.js';
 
 const router = express.Router();
 
@@ -16,4 +16,4 @@ router.put('/:id', AuthController.verifyAdmin, cityController.updateCity);
 // DELETE /cities/:id
 router.delete('/:id', AuthController.verifyAdmin, cityController.deleteCity);
 
-module.exports = router;
+export default router;

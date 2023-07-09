@@ -1,6 +1,6 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../utils/db');
-const City = require('./city');
+import { Model, DataTypes } from 'sequelize';
+import sequelize from '../utils/db.js';
+import City from './city.js';
 
 class Accommodation extends Model { }
 
@@ -56,4 +56,4 @@ Accommodation.init(
     }
 })();
 
-module.exports = Accommodation;
+export default Accommodation;

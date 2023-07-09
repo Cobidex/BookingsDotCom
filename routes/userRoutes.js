@@ -1,6 +1,6 @@
-const express = require('express');
-const UsersController = require('../controllers/UsersController');
-const AuthController = require('../controllers/AuthController');
+import express from 'express';
+import UsersController from '../controllers/UsersController.js';
+import AuthController from '../controllers/AuthController.js';
 
 const userRoutes = express.Router();
 
@@ -11,4 +11,4 @@ userRoutes.get('/count', AuthController.verifyAdmin, UsersController.getUserCoun
 userRoutes.put('/profile', AuthController.verifyUser, UsersController.editUserProfile);
 userRoutes.delete('/delete', AuthController.verifyUser, UsersController.deleteUser);
 
-module.exports = userRoutes;
+export default userRoutes;

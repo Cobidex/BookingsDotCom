@@ -1,6 +1,6 @@
-const Review = require('../models/review');
-const User = require('../models/user');
-const Accommodation = require('../models/accommodation');
+import Review from '../models/review.js';
+import User from '../models/user.js';
+import Accommodation from '../models/accommodation.js';
 
 const createReview = async (req, res) => {
   try {
@@ -48,7 +48,7 @@ const getReviews = async (req, res) => {
   }
 };
 
-module.exports = {
+export default {
   createReview,
   getReviews,
 };

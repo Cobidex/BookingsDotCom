@@ -1,5 +1,5 @@
-const { DataTypes, Model } = require('sequelize');
-const sequelize = require('../utils/db');
+import { DataTypes, Model } from 'sequelize';
+import sequelize from '../utils/db.js';
 
 class City extends Model { }
 
@@ -22,4 +22,12 @@ City.init(
     }
 );
 
-module.exports = City;
+(async () => {
+  try {
+    await City.sync();
+  } catch (error) {
+    console.log('Error creating table', error);
+  }
+})();
+
+export default City;

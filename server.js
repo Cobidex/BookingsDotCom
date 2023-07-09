@@ -1,16 +1,17 @@
-const express = require('express');
-const userRoutes = require('./routes/userRoutes');
-const accommodationRoutes = require('./routes/accommodationRoutes');
-const bookingRoutes = require('./routes/bookingRoutes');
-const cityRoutes = require('./routes/cityRoutes');
-const reviewRoutes = require('./routes/reviewRoutes');
-
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import userRoutes from './routes/userRoutes.js';
+import cityRoutes from './routes/cityRoutes.js';
+import accommodationRoutes from './routes/accommodationRoutes.js';
+import bookingRoutes from './routes/bookingRoutes.js';
+import reviewRoutes from './routes/reviewRoutes.js';
 
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
+app.use(cookieParser());
 app.use('/users', userRoutes);
 app.use('/accommodations', accommodationRoutes);
 app.use('/booking', bookingRoutes);

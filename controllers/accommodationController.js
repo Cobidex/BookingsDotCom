@@ -1,5 +1,5 @@
-const Accommodation = require('../models/accommodation');
-const City = require('../models/city');
+import Accommodation from '../models/accommodation.js';
+import City from '../models/city.js';
 
 const createAccommodation = async (req, res) => {
   const admin = req.user.admin;
@@ -45,7 +45,7 @@ const createAccommodation = async (req, res) => {
   }
 };
 
-const updateAccommodation = async (req, res) {
+const updateAccommodation = async (req, res) => {
   try {
     const { id } = req.params;
     const {
@@ -148,7 +148,7 @@ const getAccommodationsCountByCity = async (req, res) => {
   }
 };
 
-module.exports = {
+export default {
   createAccommodation,
   updateAccommodation,
   deleteAccommodation,

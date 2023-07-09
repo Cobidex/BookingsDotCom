@@ -1,9 +1,19 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../utils/db');
+import { Model, DataTypes } from 'sequelize';
+import sequelize from '../utils/db.js';
 
 class User extends Model {
   getName() {
     return `${this.firstName} ${this.lastName}`;
+  }
+
+  toJson() {
+    return {
+      firstname: this.firstName,
+      lastname: this.lastName,
+      email: this.email,
+      phonenumber: this.phoneNumber,
+      isAdmin: this.isAdmin,
+    };
   }
 }
 
@@ -69,4 +79,4 @@ User.init(
   }
 })();
 
-module.exports = User;
+export default User;

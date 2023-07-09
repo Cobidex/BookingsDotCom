@@ -1,6 +1,6 @@
-const express = require('express');
-const bookingController = require('../controllers/bookingController');
-const AuthController = require('../controllers/AuthController');
+import express from 'express';
+import bookingController from '../controllers/bookingController.js';
+import AuthController from '../controllers/AuthController.js';
 
 const router = express.Router();
 
@@ -8,4 +8,4 @@ const router = express.Router();
 router.post('/book', AuthController.verifyUser, bookingController.createBooking);
 router.delete('/:id', AuthController.verifyUser, bookingController.cancelBooking);
 
-module.exports = router;
+export default router;
