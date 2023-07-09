@@ -25,7 +25,7 @@ async function comparePasswords(plainPassword, hashedPassword) {
 }
 
 class UsersController {
-  static async postNew(req, res) {
+  static async signUp(req, res) {
     // Validate user inputs
     await body('firstName').notEmpty().trim().escape().run(req);
     await body('lastName').notEmpty().trim().escape().run(req);
@@ -76,7 +76,7 @@ class UsersController {
     }
   }
 
-  static async loginUser(req, res) {
+  static async signIn(req, res) {
 
     const { email, password } = req.body;
 
@@ -122,7 +122,7 @@ class UsersController {
     }
   }
 
-  static async putUser(req, res) {
+  static async editUserProfile(req, res) {
     const id = req.user.userId;
 
     try {
@@ -164,7 +164,7 @@ class UsersController {
     }
   }
 
-  static async countUser(req, res) {
+  static async getUserCount(req, res) {
     try {
       const count = await User.count();
       res.json({ count });
