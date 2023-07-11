@@ -1,8 +1,8 @@
 import bcrypt from 'bcrypt';
 import { body, validationResult } from 'express-validator';
+import sequelize from '../utils/db.js';
 import User from '../models/user.js';
 import AuthController from './AuthController.js';
-import sequelize from '../utils/db.js';
 
 async function hashPassword(password) {
   try {
