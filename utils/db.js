@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
 
-const dbName = process.env.BDC_DBNAME;
+const dbName = process.env.DATABASE;
 const username = process.env.BDC_USERNAME;
 const password = process.env.BDC_PASSWORD;
 const host = process.DB_HOST || 'localhost';
