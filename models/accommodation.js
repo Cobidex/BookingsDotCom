@@ -48,12 +48,4 @@ Accommodation.init(
     }
 );
 
-(async () => {
-    try {
-        await Accommodation.sync();
-    } catch (error) {
-        console.log('Error creating table', error);
-    }
-})();
-
 export default Accommodation;

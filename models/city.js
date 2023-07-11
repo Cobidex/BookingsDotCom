@@ -22,12 +22,4 @@ City.init(
     }
 );
 
-(async () => {
-  try {
-    await City.sync();
-  } catch (error) {
-    console.log('Error creating table', error);
-  }
-})();
-
 export default City;

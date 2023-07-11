@@ -49,12 +49,4 @@ Review.init(
 Review.belongsTo(User, { foreignKey: 'user_id' });
 Review.belongsTo(Accommodation, { foreignKey: 'accomo_id' });
 
-(async () => {
-  try {
-    await Review.sync();
-  } catch (error) {
-    console.log('Error creating table', error);
-  }
-})();
-
 export default Review;

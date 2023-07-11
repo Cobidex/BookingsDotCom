@@ -47,12 +47,4 @@ Booking.init(
 Booking.belongsTo(User, { foreignKey: 'user_id' });
 Booking.belongsTo(Accommodation, { foreignKey: 'accomo_id' });
 
-(async () => {
-  try {
-    await Booking.sync();
-  } catch (error) {
-    console.log('Error creating table', error);
-  }
-})();
-
 export default Booking;

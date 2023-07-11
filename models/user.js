@@ -71,12 +71,6 @@ User.init(
   }
 );
 
-(async () => {
-  try {
-    await User.sync();
-  } catch (error) {
-    console.log('Error creating table', error);
-  }
-})();
+sequelize.sync();
 
 export default User;
