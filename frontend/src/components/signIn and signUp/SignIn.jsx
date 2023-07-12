@@ -10,7 +10,7 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/users/signin', { email, password });
+      const response = await axios.get('http://localhost:5000/users/signin', { email, password },{mode:'cors'});
 
       // Handle successful signin
       console.log('User signed in:', response.data);
@@ -46,7 +46,7 @@ const SignIn = () => {
           required
         />
         <br />
-        <button type="submit">Sign In</button>
+        <button type='submit'><a onClick={handleSignin}>Sign In</a></button>
       </form>
     </div>
   );
