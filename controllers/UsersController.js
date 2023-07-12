@@ -77,6 +77,13 @@ class UsersController {
   }
 
   static async signIn(req, res) {
+    await body('email').notEmpty().isEmail().normalizeEmail().run(req);
+    await body('password').notEmpty().run(req);
+
+    const validationErrors = validationResult(req);
+    if (!validationErrors.isEmpty()) {
+      return res.status(400).json({ errors: validationErrors.array() });
+    }
 
     const { email, password } = req.body;
 
