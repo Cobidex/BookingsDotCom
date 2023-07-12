@@ -10,8 +10,18 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.get('http://localhost:5000/users/signin', { email, password },{mode:'cors'});
-
+      const response = await axios.post(
+        'http://localhost:5000/users/signin',
+        { email, password },
+        {
+          headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:5173',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+          },
+        }
+      );
       // Handle successful signin
       console.log('User signed in:', response.data);
 
