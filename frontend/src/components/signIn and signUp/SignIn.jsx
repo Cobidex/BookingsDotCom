@@ -13,8 +13,8 @@ const SignIn = () => {
     e.preventDefault()
 
     try {
-      const response = await fetch('your_authentication_endpoint', {
-        method: 'POST',
+      const response = await fetch('http://localhost:5000/users/signin', {
+        method: 'GET',
         headers: {
           'content-Type': 'application/json',
         },
