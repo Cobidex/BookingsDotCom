@@ -19,7 +19,7 @@ const BookingForm = () => {
       });
 
       console.log('Booking created:', response.data);
-      // Do something with the created booking data if needed
+      
 
       // Clear form inputs
       setCheckIn('');
