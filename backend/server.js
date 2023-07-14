@@ -10,28 +10,15 @@ import reviewRoutes from './routes/reviewRoutes.js';
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(
-  cors({
-    origin: 'http://localhost:5173',
-    optionsSuccessStatus: 200,
-    allowedHeaders: 'Content-Type, Authorization',
-    credentials: true,
-  })
-);
+app.use(express.static('dist'));
 
 app.use(express.json());
 app.use(cookieParser());
-app.use('/users', userRoutes);
-app.use('/accommodations', accommodationRoutes);
-app.use('/booking', bookingRoutes);
-app.use('/cities', cityRoutes);
-app.use('/reviews', reviewRoutes);
-
-// Handle OPTIONS request
-app.options('*', (req, res) => {
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.sendStatus(200);
-});
+app.use('api/users', userRoutes);
+app.use('api/accommodations', accommodationRoutes);
+app.use('api/booking', bookingRoutes);
+app.use('api/cities', cityRoutes);
+app.use('api/reviews', reviewRoutes);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
