@@ -2,6 +2,8 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import SignIn from './components/signIn and signUp/SignIn'
 import SignUp from './components/signIn and signUp/SignUp'
+import BookingForm from './components/booking/BookingForm'
+import BookingDetails from './components/booking/BookingDetails'
 
 
 const App = () => {
@@ -13,6 +15,8 @@ const App = () => {
         <Routes>
           <Route path='/SignIn' element={<SignIn />} />
           <Route path='/SignUp' element={<SignUp />} />
+          <Route path='/BookingForm' element={<BookingForm />} />
+          <Route path='BookingDetails' element={<BookingDetails />} />
         </Routes>
     </>
   )
