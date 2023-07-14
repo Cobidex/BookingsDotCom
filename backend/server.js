@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import userRoutes from './routes/userRoutes.js';
 import cityRoutes from './routes/cityRoutes.js';
@@ -14,11 +13,11 @@ app.use(express.static('dist'));
 
 app.use(express.json());
 app.use(cookieParser());
-app.use('api/users', userRoutes);
-app.use('api/accommodations', accommodationRoutes);
-app.use('api/booking', bookingRoutes);
-app.use('api/cities', cityRoutes);
-app.use('api/reviews', reviewRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/accommodations', accommodationRoutes);
+app.use('/api/booking', bookingRoutes);
+app.use('/api/cities', cityRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
