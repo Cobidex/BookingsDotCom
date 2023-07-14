@@ -54,19 +54,21 @@ const SignIn = () => {
     //   </form>
     // </div>
 
-    <section className="h-screen flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
+    <section className="h-screen flex flex-col lg:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
       {/* sign in image */}
-      <div className="md:w-1/3 max-w-sm">
+      <div className="md:w-1h/3 max-w-sm">
         <img
           // src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
           src='https://images.unsplash.com/photo-1591248575896-a7eab342cd71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80'
-          alt="Sample image" />
+          alt="Sample image"
+          className='hidden lg:block rounded-md' />
       </div>
 
       {/* sign in with: */}
-      <div className="md:w-1/3 max-w-sm">
+      <div className="//md:w-1/3  //max-w-sm border bg-gray-50 rounded-md shadow-md border-teal-500 p-10">
         <div className="text-center md:text-left">
-          <label className="mr-1">Sign in with</label>
+          
+          <label className="mr-1 text-teal-700">Sign in with</label>
           {/* Google mail */}
           <button
             type="button"
