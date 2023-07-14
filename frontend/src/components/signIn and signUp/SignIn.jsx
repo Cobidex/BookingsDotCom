@@ -30,45 +30,19 @@ const SignIn = () => {
   };
 
   return (
-    // <div>
-    //   <h2>Sign In</h2>
-    //   {error && <p>{error}</p>}
-    //   <form onSubmit={handleSignin}>
-    //     <label>Email:</label>
-    //     <input
-    //       type="email"
-    //       value={email}
-    //       onChange={(e) => setEmail(e.target.value)}
-    //       required
-    //     />
-    //     <br />
-    //     <label>Password:</label>
-    //     <input
-    //       type="password"
-    //       value={password}
-    //       onChange={(e) => setPassword(e.target.value)}
-    //       required
-    //     />
-    //     <br />
-    //     <button type='submit'><a onClick={handleSignin}>Sign In</a></button>
-    //   </form>
-    // </div>
-
-    <section className="h-screen flex flex-col lg:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
+    <section className="h-screen flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
       {/* sign in image */}
-      <div className="md:w-1h/3 max-w-sm">
+      <div className="md:w-1/3 max-w-sm">
         <img
-          // src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-          src='https://images.unsplash.com/photo-1591248575896-a7eab342cd71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80'
-          alt="Sample image"
-          className='hidden lg:block rounded-md' />
+          src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+          // src=''
+          alt="Sample image" />
       </div>
 
       {/* sign in with: */}
-      <div className="//md:w-1/3  //max-w-sm border bg-gray-50 rounded-md shadow-md border-teal-500 p-10">
+      <div className="md:w-1/3 max-w-sm">
         <div className="text-center md:text-left">
-          
-          <label className="mr-1 text-teal-700">Sign in with</label>
+          <label className="mr-1">Sign in with</label>
           {/* Google mail */}
           <button
             type="button"
@@ -77,7 +51,7 @@ const SignIn = () => {
               xmlns="http://www.w3.org/2000/svg"
               className="mx-auto h-3.5 w-3.5"
               fill="currentColor"
-              viewBox="0 0 24 24">
+              viewBox="0 0 30 30">
               <path d="M16.318 13.714v5.484h9.078c-0.37 2.354-2.745 6.901-9.078 6.901-5.458 0-9.917-4.521-9.917-10.099s4.458-10.099 9.917-10.099c3.109 0 5.193 1.318 6.38 2.464l4.339-4.182c-2.786-2.599-6.396-4.182-10.719-4.182-8.844 0-16 7.151-16 16s7.156 16 16 16c9.234 0 15.365-6.49 15.365-15.635 0-1.052-0.115-1.854-0.255-2.651z"></path>
             </svg>
           </button>
@@ -113,12 +87,12 @@ const SignIn = () => {
             <a className="text-teal-600 hover:text-teal-700 hover:underline hover:underline-offset-4" href="#">Forgot Password?</a>
           </div>
           <div className="text-center md:text-left">
-            <button className="mt-4 bg-teal-600 hover:bg-teal-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider" type="submit">Login</button>
+            <button className="mt-4 bg-teal-600 hover:bg-teal-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider" type="submit"><a onClick={handleSignin}>Sign In</a></button>
           </div>
         </form>
         {/* Register link */}
         <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
-          {/* Don't have an account? <Link className="text-red-600 hover:underline hover:underline-offset-4" to={"/SignUp"}>Register</Link> */}
+           Don't have an account? <Link className="text-red-600 hover:underline hover:underline-offset-4" to="/SignUp">Register</Link>
         </div>
       </div>
     </section>
