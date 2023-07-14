@@ -37,7 +37,7 @@ const BookingDetails = ({ bookingId }) => {
       <p>Check-out: {booking.checkOut}</p>
       <p>User ID: {booking.user_id}</p>
       <p>Accommodation ID: {booking.accomo_id}</p>
-      {/* Add additional booking details as needed */}
+      
     </div>
   );
 };
