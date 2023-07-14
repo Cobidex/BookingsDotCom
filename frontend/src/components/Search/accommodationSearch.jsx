@@ -8,7 +8,7 @@ const AccommodationSearch = () => {
     const handleSearch = async (searchCriteria) => {
         try {
             // make API call to fetch accommodation data based on search criteria
-            const response = await fetch('http://localhost:5000/accommodations/search', {
+            const response = await fetch('/api/accommodations/search', {
                 method: 'GET',
                 header: {
                     'content-Type': 'application/json',

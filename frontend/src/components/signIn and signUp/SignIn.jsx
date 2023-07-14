@@ -11,10 +11,9 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        'http://localhost:5000/users/signin',
+      const response = await axios.get(
+        '/api/users/signin',
         { email, password },
-        { withCredentials: true },
       );
       // Handle successful signin
       console.log('User signed in:', response.data);

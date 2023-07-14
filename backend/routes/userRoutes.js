@@ -5,7 +5,7 @@ import AuthController from '../controllers/AuthController.js';
 const userRoutes = express.Router();
 
 userRoutes.post('/signup', UsersController.signUp);
-userRoutes.post('/signin', UsersController.signIn);
+userRoutes.get('/signin', UsersController.signIn);
 userRoutes.get('/profile', AuthController.verifyUser, UsersController.getUserProfile);
 userRoutes.get('/count', AuthController.verifyAdmin, UsersController.getUserCount);
 userRoutes.put('/profile', AuthController.verifyUser, UsersController.editUserProfile);
