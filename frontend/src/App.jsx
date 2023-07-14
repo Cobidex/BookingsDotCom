@@ -4,6 +4,8 @@ import SignIn from './components/signIn and signUp/SignIn'
 import SignUp from './components/signIn and signUp/SignUp'
 import BookingForm from './components/booking/BookingForm'
 import BookingDetails from './components/booking/BookingDetails'
+import ReviewForm from './components/review/ReviewForm'
+import ReviewList from './components/review/ReviewList'
 
 
 const App = () => {
@@ -17,6 +19,8 @@ const App = () => {
           <Route path='/SignUp' element={<SignUp />} />
           <Route path='/BookingForm' element={<BookingForm />} />
           <Route path='BookingDetails' element={<BookingDetails />} />
+          <Route path='ReviewForm' element={<ReviewForm />} />
+          <Route path='ReviewList' element={<ReviewList />} />
         </Routes>
     </>
   )
