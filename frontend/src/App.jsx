@@ -11,6 +11,7 @@ import ReviewList from './components/review/ReviewList'
 const App = () => {
   return (
     <>
+      <div className='bg-gray-100 min-h-screen'>
       {/*<div className='text-lg text-gray-500'>Hello everyone welcome to <span className='border-b-2 text-teal-500 shadow rounded-md text-2xl'>BookingsDotCom</span></div>*/}
       {/* <SignIn /> */}
       {/* <SignUp /> */}
@@ -22,6 +23,7 @@ const App = () => {
           <Route path='ReviewForm' element={<ReviewForm />} />
           <Route path='ReviewList' element={<ReviewList />} />
         </Routes>
+        </div>
     </>
   )
 }
