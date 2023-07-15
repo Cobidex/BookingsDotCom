@@ -13,6 +13,7 @@ import BookingDetails from './components/booking/BookingDetails'
 // Reviews
 import ReviewForm from './components/review/ReviewForm'
 import ReviewList from './components/review/ReviewList'
+import UserDashboard from './components/dashboard/UserDashboard'
 
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
           <Route path='BookingDetails' element={<BookingDetails />} />
           <Route path='ReviewForm' element={<ReviewForm />} />
           <Route path='ReviewList' element={<ReviewList />} />
+          <Route path='UserDashboard' element={<UserDashboard />} />
         </Routes>
         </div>
     </>
