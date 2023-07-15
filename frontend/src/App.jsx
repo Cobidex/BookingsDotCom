@@ -13,7 +13,9 @@ import BookingDetails from './components/booking/BookingDetails'
 // Reviews
 import ReviewForm from './components/review/ReviewForm'
 import ReviewList from './components/review/ReviewList'
+//Dashboard
 import UserDashboard from './components/dashboard/UserDashboard'
+import BookingHistory from './components/dashboard/BookingHistory'
 
 
 const App = () => {
@@ -31,10 +33,11 @@ const App = () => {
           <Route path='/SearchForm' element={<SearchForm />} />
           <Route path='/SearchResult' element={<SearchResults />} />
           <Route path='/BookingForm' element={<BookingForm />} />
-          <Route path='BookingDetails' element={<BookingDetails />} />
-          <Route path='ReviewForm' element={<ReviewForm />} />
-          <Route path='ReviewList' element={<ReviewList />} />
-          <Route path='UserDashboard' element={<UserDashboard />} />
+          <Route path='/BookingDetails' element={<BookingDetails />} />
+          <Route path='/ReviewForm' element={<ReviewForm />} />
+          <Route path='/ReviewList' element={<ReviewList />} />
+          <Route path='/UserDashboard' element={<UserDashboard />} />
+          <Route path='/BookingHistory' element={<BookingHistory />} />
         </Routes>
         </div>
     </>
