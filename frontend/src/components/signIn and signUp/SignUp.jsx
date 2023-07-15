@@ -19,11 +19,13 @@ const SignUp = () => {
 
     try {
       // this make API call to register user using name, email and password
-      const response = await fetch('/api/users/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+
+      const response = await axios.post('/api/users/signup', {
+        firstName,
+        lastName,
+        email,
+        password,
+        phoneNumber,
         },
         { withCredentials: true },
       )

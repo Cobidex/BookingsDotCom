@@ -1,4 +1,6 @@
 import express from 'express';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 import cookieParser from 'cookie-parser';
 import userRoutes from './routes/userRoutes.js';
 import cityRoutes from './routes/cityRoutes.js';
@@ -9,7 +11,10 @@ import reviewRoutes from './routes/reviewRoutes.js';
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(express.static('dist'));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+app.use(express.static(join(__dirname, 'dist')));
 
 app.use(express.json());
 app.use(cookieParser());
@@ -18,6 +23,10 @@ app.use('/api/accommodations', accommodationRoutes);
 app.use('/api/booking', bookingRoutes);
 app.use('/api/cities', cityRoutes);
 app.use('/api/reviews', reviewRoutes);
+
+app.get('*', (req, res) => {
+  res.sendFile(join(__dirname, 'dist', 'index.html'));
+});
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);

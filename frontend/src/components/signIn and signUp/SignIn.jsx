@@ -11,7 +11,7 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.get(
+      const response = await axios.post(
         '/api/users/signin',
         { email, password },
       );
