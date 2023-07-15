@@ -12,7 +12,7 @@ const SignIn = () => {
 
     try {
       const response = await axios.get(
-        '/api/users/signin',
+        'http://localhost:5000//users/signin',
         { email, password },
       );
       // Handle successful signin
