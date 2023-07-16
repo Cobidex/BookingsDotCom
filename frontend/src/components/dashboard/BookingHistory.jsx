@@ -24,15 +24,15 @@ const BookingHistory = () => {
   }
 
   return (
-    <div>
-      <h2>Booking History</h2>
+    <div className="p-4 md:p-8">
+      <h2 className="text-2xl font-bold mb-4">Booking History</h2>
       <ul>
         {bookingHistory.map((booking) => (
-          <li key={booking.id}>
-            <p>Accommodation: {booking.accommodationName}</p>
-            <p>Check-in: {new Date(booking.checkIn).toLocaleDateString()}</p>
-            <p>Check-out: {new Date(booking.checkOut).toLocaleDateString()}</p>
-            <p>Status: {booking.status}</p>
+          <li key={booking.id} className='mb-4'>
+            <p className='mb-2'>Accommodation: {booking.accommodationName}</p>
+            <p className='mb-2'>Check-in: {new Date(booking.checkIn).toLocaleDateString()}</p>
+            <p className='mb-2'>Check-out: {new Date(booking.checkOut).toLocaleDateString()}</p>
+            <p className='mb-2'>Status: {booking.status}</p>
           </li>
         ))}
       </ul>

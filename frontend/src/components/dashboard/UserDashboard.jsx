@@ -45,8 +45,8 @@ const UserDashboard = () => {
   }
 
   return (
-    <div>
-      <h2>Welcome, {userProfile.firstname}!</h2>
+    <div className='p-4 md:p-8'>
+      <h2 className='text-2x1 font-bold mb-4'>Welcome, {userProfile.firstname}!</h2>
       <p>Email: {userProfile.email}</p>
       <p>Phone Number: {userProfile.phonenumber}</p>
       <p>Account Type: {userProfile.isAdmin ? 'Admin' : 'User'}</p>
@@ -62,23 +62,23 @@ const UserDashboard = () => {
         };
         handleProfileUpdate(updatedProfile);
       }}>
-        <label htmlFor="firstName">First Name:</label>
-        <input type="text" name="firstName" defaultValue={userProfile.firstname} />
+        <label htmlFor="firstName" className='block mb-2'>First Name:</label>
+        <input type="text" name="firstName" defaultValue={userProfile.firstname} className="w-full border border-gray-300 rounded py-2 px-3 mb-3" />
         <br />
-        <label htmlFor="lastName">Last Name:</label>
-        <input type="text" name="lastName" defaultValue={userProfile.lastname} />
+        <label htmlFor="lastName" className="block mb-2">Last Name:</label>
+        <input type="text" name="lastName" defaultValue={userProfile.lastname} className="w-full border border-gray-300 rounded py-2 px-3 mb-3" />
         <br />
-        <label htmlFor="email">Email:</label>
-        <input type="email" name="email" defaultValue={userProfile.email} />
+        <label htmlFor="email" className="block mb-2">Email:</label>
+        <input type="email" name="email" defaultValue={userProfile.email} className="w-full border border-gray-300 rounded py-2 px-3 mb-3" />
         <br />
-        <label htmlFor="phoneNumber">Phone Number:</label>
-        <input type="tel" name="phoneNumber" defaultValue={userProfile.phonenumber} />
+        <label htmlFor="phoneNumber" className="block mb-2">Phone Number:</label>
+        <input type="tel" name="phoneNumber" defaultValue={userProfile.phonenumber} className="w-full border border-gray-300 rounded py-2 px-3 mb-3" />
         <br />
-        <button type="submit">Update Profile</button>
+        <button type="submit" className="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded">Update Profile</button>
       </form>
 
       {/* Button for account deletion */}
-      <button onClick={handleDeleteAccount}>Delete Account</button>
+      <button onClick={handleDeleteAccount} className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete Account</button>
     </div>
   );
 };
