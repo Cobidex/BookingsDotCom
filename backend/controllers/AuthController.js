@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 const secretKey = process.env.BDC_SECRET_KEY;
 
 class AuthController {
-  static async createToken(payload, res) {
+  static async createToken(payload) {
     const token = await jwt.sign(payload, secretKey, { expiresIn: '1h' });
     return token;
   }
@@ -33,7 +33,6 @@ class AuthController {
     try {
       const decoded = jwt.verify(token, secretKey);
       const admin = decoded.admin;
-
       if (admin) {
         next();
       } else {

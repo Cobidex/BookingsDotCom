@@ -93,17 +93,18 @@ class UsersController {
       if (!user) {
         return res.status(401).json({ error: 'User not found' });
       }
-    
+
       const match = await comparePasswords(password, user.password);
       if (!match) {
         return res.status(401).json({ error: 'Unauthorized' });
       }
 
-      const admin = user.isAdmin;
-      const payload = { admin, userId: user.id };
+      const isAdmin = user.isAdmin;
+      const payload = { admin: isAdmin, userId: user.id };
       const token = await AuthController.createToken(payload);
       res.cookie('token', token, { httpOnly: true, secure: true });
 
+      console.log(token);
       return res.status(200).json(user.toJson());
 
     } catch (error) {
@@ -113,21 +114,20 @@ class UsersController {
   }
 
   static async getUserProfile(req, res) {
-    const id = req.user.userId;
     try {
+      const id = req.user.userId;
       const user = await User.findByPk(id);
 
       return res.status(200).json(user.toJson());
     } catch (error) {
-      console.log('error getting user profile details', error);
-      return res.status(500).json({ error: 'internal server error' });
+      console.log('user not found', error);
+      return res.status(500).json({ error: 'user not found' });
     }
   }
 
   static async editUserProfile(req, res) {
-    const id = req.user.userId;
-
     try {
+      const id = req.user.userId;
       const user = await User.findByPk(id);
 
       const {
@@ -153,14 +153,14 @@ class UsersController {
       res.status(200).json(user.toJson());
 
     } catch (error) {
-      console.log('error updating user details', error)
-      return res.status(500).json({ error: 'internal server error' });
+      console.log('user not found', error)
+      return res.status(500).json({ error: 'user not found' });
     }
   }
 
   static async deleteUser(req, res) {
-    const id = req.user.userId;
     try {
+      const id = req.user.userId;
       const user = await User.findByPk(id);
 
       if (user) {
@@ -171,8 +171,8 @@ class UsersController {
       }
 
     } catch (error) {
-      console.log('error deleting user', error);
-      return res.status(500).json({ error: 'internal server error' });
+      console.log('user not found', error);
+      return res.status(500).json({ error: 'user not found' });
     }
   }
 

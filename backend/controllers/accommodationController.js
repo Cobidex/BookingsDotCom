@@ -2,46 +2,40 @@ import Accommodation from '../models/accommodation.js';
 import City from '../models/city.js';
 
 const createAccommodation = async (req, res) => {
-  const admin = req.user.admin;
-  if (admin) {
-    try {
-      // Extract data from the request body
-      const {
-        name,
-        description,
-        pricePerNight,
-        type,
-        availableDates,
-        city,
-      } = req.body;
+  // Extract data from the request body
+  const {
+    name,
+    description,
+    pricePerNight,
+    type,
+    availableDates,
+    city_id,
+  } = req.body;
+  // Check if the city exists
+  const existingCity = await City.findByPk(city_id);
+  if (!existingCity) {
+    return res.status(404).json({ error: 'City not found' });
+  }
 
-      // Check if the city exists
-      const existingCity = await City.findByPk(city.id);
-      if (!existingCity) {
-        return res.status(404).json({ error: 'City not found' });
-      }
+  // Create a new accommodation object with the associated cityId
+  const newAccommodation = {
+    name,
+    description,
+    pricePerNight,
+    type,
+    availableDates,
+    cityId: existingCity.id, // Assign the existing city's ID as the cityId for the accommodation
+  };
 
-      // Create a new accommodation object with the associated cityId
-      const newAccommodation = {
-        name,
-        description,
-        pricePerNight,
-        type,
-        availableDates,
-        cityId: existingCity.id, // Assign the existing city's ID as the cityId for the accommodation
-      };
+  try {
+    // Insert the new accommodation into the database using the Accommodation model
+    const createdAccommodation = await Accommodation.create(newAccommodation);
 
-      // Insert the new accommodation into the database using the Accommodation model
-      const createdAccommodation = await Accommodation.create(newAccommodation);
-
-      // Return the created accommodation in the response
-      res.status(201).json(createdAccommodation);
-    } catch (error) {
-      // Handle any errors that occur during the insertion process
-      res.status(500).json({ error: 'Failed to create accommodation' });
-    }
-  } else {
-    res.status(401).json({ error: 'Unauthorized' });
+    // Return the created accommodation in the response
+    res.status(201).json(createdAccommodation);
+  } catch (err) {
+    console.log('error creating accommodation:', err);
+    res.status(500).json({ error: 'Serverside Error' });
   }
 };
 
