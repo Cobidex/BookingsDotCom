@@ -104,7 +104,6 @@ class UsersController {
       const token = await AuthController.createToken(payload);
       res.cookie('token', token, { httpOnly: true, secure: true });
 
-      console.log(token);
       return res.status(200).json(user.toJson());
 
     } catch (error) {

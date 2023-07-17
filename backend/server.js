@@ -1,6 +1,7 @@
 import express from 'express';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import userRoutes from './routes/userRoutes.js';
 import cityRoutes from './routes/cityRoutes.js';
@@ -9,6 +10,9 @@ import bookingRoutes from './routes/bookingRoutes.js';
 import reviewRoutes from './routes/reviewRoutes.js';
 
 const app = express();
+
+app.use(cors());
+
 const port = process.env.PORT || 5000;
 
 const __filename = fileURLToPath(import.meta.url);
