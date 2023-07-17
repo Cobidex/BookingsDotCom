@@ -36,7 +36,7 @@ CREATE TABLE `Accommodation` (
   PRIMARY KEY (`id`),
   KEY `cityId` (`cityId`),
   CONSTRAINT `Accommodation_ibfk_1` FOREIGN KEY (`cityId`) REFERENCES `City` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,6 +45,7 @@ CREATE TABLE `Accommodation` (
 
 LOCK TABLES `Accommodation` WRITE;
 /*!40000 ALTER TABLE `Accommodation` DISABLE KEYS */;
+INSERT INTO `Accommodation` VALUES (1,'Cottage House',NULL,15000.00,'Duplex',NULL,6,0.0,'2023-07-16 16:30:32','2023-07-16 16:30:32'),(2,'Happy Place',NULL,10000.00,'Hotel',NULL,6,0.0,'2023-07-16 16:32:15','2023-07-16 16:32:15'),(3,'Small Hut',NULL,10000.00,'Shortlet',NULL,6,0.0,'2023-07-16 16:33:04','2023-07-16 16:33:04');
 /*!40000 ALTER TABLE `Accommodation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +94,7 @@ CREATE TABLE `City` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,6 +103,7 @@ CREATE TABLE `City` (
 
 LOCK TABLES `City` WRITE;
 /*!40000 ALTER TABLE `City` DISABLE KEYS */;
+INSERT INTO `City` VALUES (1,'Accra','2023-07-16 14:31:30','2023-07-16 14:31:30'),(2,'Portharcourt','2023-07-16 14:31:50','2023-07-16 14:31:50'),(3,'Enugu','2023-07-16 14:31:58','2023-07-16 14:31:58'),(4,'Abuja','2023-07-16 14:32:04','2023-07-16 14:32:04'),(5,'Ikeja','2023-07-16 14:32:16','2023-07-16 14:32:16'),(6,'Owerri','2023-07-16 14:32:26','2023-07-16 14:32:26');
 /*!40000 ALTER TABLE `City` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,7 +167,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES ('167ae356-1348-45e6-b0ea-b3398dc99ff3','bdc','user','bdc_user@gmail.com','$2b$10$FfbBz1ufZ7tq91YAPaEgieS85reUlcb40nFw9kYsLg5LsjYaFb0QW','123456789',0,'2023-07-11 20:39:35','2023-07-11 20:39:35'),('5adbfe52-8d61-4ceb-bc7c-7fe0019abeda','bdc','dev','bdc_dev@gmail.com','$2b$10$z2SQirpZ8zZC6bGXqpXvQOO6KIpjJ5OAkbAJxEr4fbD5.9xluunDm','123456789',1,'2023-07-11 20:37:33','2023-07-11 20:37:33');
+INSERT INTO `Users` VALUES ('167ae356-1348-45e6-b0ea-b3398dc99ff3','bdc','user','bdc_user@gmail.com','$2b$10$FfbBz1ufZ7tq91YAPaEgieS85reUlcb40nFw9kYsLg5LsjYaFb0QW','123456789',0,'2023-07-11 20:39:35','2023-07-11 20:39:35'),('2ff8615b-1a59-48af-8928-e6c6a0dae561','Steve','Obi','james@gmail.com','$2b$10$wQ.28VcYbeHGqseEV6WOcOZk/Xp6yQbyTl5mrRlWUSXxOjj.g9XjC','09878762534',0,'2023-07-15 10:00:56','2023-07-15 10:00:56'),('332d83d6-7921-45af-bf7b-12531f92182c','Stephen','Obialor','cobidex@gmail.com','$2b$10$NhBIBgne/yG01hVSfVdEs.nw3UMbhd/NPMDGgNZEu277NHI6Tw4q6','08109134162',0,'2023-07-17 19:26:16','2023-07-17 19:26:16'),('5adbfe52-8d61-4ceb-bc7c-7fe0019abeda','bdc','dev','bdc_dev@gmail.com','$2b$10$z2SQirpZ8zZC6bGXqpXvQOO6KIpjJ5OAkbAJxEr4fbD5.9xluunDm','123456789',1,'2023-07-11 20:37:33','2023-07-11 20:37:33');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -178,4 +180,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-07-11 20:47:20
+-- Dump completed on 2023-07-17 23:15:01
