@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
 const SignUp = () => {
@@ -12,7 +12,7 @@ const SignUp = () => {
   const [success, setSuccess] = useState('')
 
   // access history object
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault()
@@ -35,6 +35,7 @@ const SignUp = () => {
         setSuccess('Registration successful!')
         setError('')
         // redirect here to either sign up or dashboard
+        navigate('/SignIn')
       } else {
         // display error message
         const errorData = await response.json()

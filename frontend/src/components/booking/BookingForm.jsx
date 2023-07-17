@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const BookingForm = () => {
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const [accommodationId, setAccommodationId] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  const navigate = useNavigate();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +21,10 @@ const BookingForm = () => {
         accommodationId,
       });
 
+      if (response.status === 401) {
+        navigate('/SignIn');
+      }
+
       console.log('Booking created:', response.data);
       // Do something with the created booking data if needed
 
@@ -25,6 +32,7 @@ const BookingForm = () => {
       setCheckIn('');
       setCheckOut('');
       setAccommodationId('');
+      navigate('/BookingDetails');
     } catch (error) {
       console.error('Failed to create booking:', error.response.data);
       setErrorMessage('Failed to create booking');
