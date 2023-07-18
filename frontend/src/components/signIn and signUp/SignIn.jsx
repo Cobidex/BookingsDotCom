@@ -33,19 +33,23 @@ const SignIn = () => {
   };
 
   return (
-    <section className="h-screen flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
+    <section className="flex flex-col justify-center items-center min-h-screen">
       {/* sign in image */}
-      <div className="md:w-1/3 max-w-sm">
+      {/*<div className="md:w-1/3 max-w-sm">
         <img
           src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
           // src=''
           alt="Sample image" />
-      </div>
+  </div>*/}
+
+  
 
       {/* sign in with: */}
-      <div className="md:w-1/3 max-w-sm">
+      <div className="max-w-md w-full mx-4 bg-gray-600/30 p-6 rounded-lg shadow-md border border-white">
+      <div className='text-center text-2xl font-semibold text-teal-400 mb-4'>Sign In</div>
+      <div className="text-white mb-4 font-thin text-lg">To proceed with your bookings and take advantage of our exclusive member benefits, simply sign in to your account below.</div>
         <div className="text-center md:text-left">
-          <label className="mr-1">Sign in with</label>
+          <label className="mr-1 text-white text-lg font-thin">Sign in with</label>
           {/* Google mail */}
           <button
             type="button"
@@ -74,7 +78,7 @@ const SignIn = () => {
         </div>
         {/* OR */}
         <div className="my-5 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
-          <p className="mx-4 mb-0 text-center font-semibold text-slate-500">Or</p>
+          <p className="mx-4 mb-0 text-center font-semibold text-teal-400">Or</p>
         </div>
         {/* FORM */}
         {error && <p>{error}</p>}
@@ -82,20 +86,20 @@ const SignIn = () => {
           <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded" type="email" value={email} placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
           <input className="text-sm w-full px-4 py-2 border border-solid border-gray-300 rounded mt-4" type="password" placeholder='Password' value={password}  onChange={(e) => setPassword(e.target.value)}  required/>
           <div className="mt-4 flex justify-between font-semibold text-sm">
-            <label className="flex text-slate-500 hover:text-slate-600 cursor-pointer">
+            <label className="flex text-white text-lg font-thin hover:text-slate-600 cursor-pointer">
               <input className="mr-1" type="checkbox" />
               <span>Remember Me</span>
               {/* Forgot Password */}
             </label>
-            <a className="text-teal-600 hover:text-teal-700 hover:underline hover:underline-offset-4" href="#">Forgot Password?</a>
+            <a className="text-teal-400 text-lg font-thin hover:text-teal-700 hover:underline hover:underline-offset-4" href="#">Forgot Password?</a>
           </div>
           <div className="text-center md:text-left">
             <button className="mt-4 bg-teal-600 hover:bg-teal-700 px-4 py-2 text-white uppercase rounded text-xs tracking-wider" type="submit"><a onClick={handleSignin}>Sign In</a></button>
           </div>
         </form>
         {/* Register link */}
-        <div className="mt-4 font-semibold text-sm text-slate-500 text-center md:text-left">
-           Don't have an account? <Link className="text-red-600 hover:underline hover:underline-offset-4" to="/SignUp">Register</Link>
+        <div className="mt-4 font-thin text-white text-lg text-center md:text-left">
+           Don't have an account? <Link className="text-red-600 text-lg font-semibold hover:underline hover:underline-offset-4" to="/SignUp">Register</Link>
         </div>
       </div>
     </section>

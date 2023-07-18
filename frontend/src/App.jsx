@@ -17,11 +17,17 @@ import ReviewList from './components/review/ReviewList'
 import UserDashboard from './components/dashboard/UserDashboard'
 import BookingHistory from './components/dashboard/BookingHistory'
 
+import Footer from './components/Footer'
+import videoBg from './assets/pexels-joão-pedro-15854157 (1080p).mp4'
+
 
 const App = () => {
   return (
     <>
-      <div className='bg-gray-100 min-h-screen'>
+     <video
+        className='absolute object-cover w-full h-full -z-10' 
+        src={videoBg} autoPlay loop muted/> 
+      <div className='backdrop-brightness-50'>
       {/*<div className='text-lg text-gray-500'>Hello everyone welcome to <span className='border-b-2 text-teal-500 shadow rounded-md text-2xl'>BookingsDotCom</span></div>*/}
       {/* <SignIn /> */}
       {/* <SignUp /> */}
@@ -38,6 +44,7 @@ const App = () => {
           <Route path='/ReviewList' element={<ReviewList />} />
           <Route path='/UserDashboard' element={<UserDashboard />} />
           <Route path='/BookingHistory' element={<BookingHistory />} />
+          <Route path='/Footer' element={<Footer />} />
         </Routes>
         </div>
     </>
