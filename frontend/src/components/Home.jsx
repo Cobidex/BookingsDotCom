@@ -1,11 +1,11 @@
 import React from 'react'
 import AccommodationSearch from './Search/accommodationSearch'
-import Navbar from './Navbar'
+//import Navbar from './Navbar'
 
 const Home = () => {
   return (
     <div className=" min-h-screen py-8">
-      <Navbar />
+      {/*<Navbar />*/}
       <div className="max-w-3xl mx-auto p-8">
         <h1 className="text-4xl text-white font-bold mb-4">Welcome to BookingsDotCom!</h1>
         <p className="text-lg text-white mb-6">
