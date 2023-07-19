@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "node server.js",
-    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "test": "mocha --recursive ./test"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -18,7 +19,11 @@
     "sequelize": "^6.6.2"
   },
   "devDependencies": {
-    "eslint": "^8.44.0"
+    "chai": "^4.3.7",
+    "eslint": "^8.44.0",
+    "mocha": "^10.2.0",
+    "sinon": "^15.2.0",
+    "supertest": "^6.3.3"
   },
   "engines": {
     "node": ">=18"
