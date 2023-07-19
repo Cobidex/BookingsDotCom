@@ -31,8 +31,8 @@ const Navbar = () => {
       <div className="space-x-4">
         <Link to="/" className="text-white hover:text-blue-200">Home</Link>
         <Link to="/accommodation" className="text-white hover:text-blue-200">Accommodation</Link>
-        <Link to="/booking" className="text-white hover:text-blue-200">Booking</Link>
-        <Link to="/profile" className="text-white hover:text-blue-200">Profile</Link>
+        <Link to="/BookingForm" className="text-white hover:text-blue-200">Booking</Link>
+        <Link to="/UserDashboard" className="text-white hover:text-blue-200">Profile</Link>
       </div>
     </nav>
   );
