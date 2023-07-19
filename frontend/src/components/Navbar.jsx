@@ -28,11 +28,11 @@ const Navbar = () => {
       <div className="text-white font-bold text-lg">Logo</div>
 
       {/* Navigation links on the right */}
-      <div className="space-x-4">
-        <Link to="signin" className="text-white hover:text-blue-200">Home</Link>
-        <Link to="/accommodation" className="text-white hover:text-blue-200">Accommodation</Link>
-        <Link to="/BookingForm" className="text-white hover:text-blue-200">Booking</Link>
-        <Link to="/UserDashboard" className="text-white hover:text-blue-200">Profile</Link>
+      <div className="space-x-4 bg-white p-2 rounded-md shadow text-lg font-semibold">
+        <Link to="signin" className="text-teal-500">Home</Link>
+        <Link to="/accommodation" className="text-teal-500 hover:text-blue-200 navg">Accommodation</Link>
+        <Link to="/BookingForm" className="text-teal-500">Booking</Link>
+        <Link to="/UserDashboard" className="text-teal-500">Profile</Link>
       </div>
     </nav>
   );
