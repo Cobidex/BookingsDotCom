@@ -49,8 +49,6 @@ const App = () => {
           <Route path='/UserDashboard' element={<UserDashboard />} />
           <Route path='/BookingHistory' element={<BookingHistory />} />
 	  <Route path='/Footer' element={<Footer />} />
-=======
-          <Route path='/Footer' element={<Footer />} />
         </Routes>
         </div>
     </>
