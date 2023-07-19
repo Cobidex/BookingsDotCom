@@ -76,7 +76,7 @@ const SearchResults = ({ searchCriteria }) => {
         <p>Loading...</p>
       ) : (
         <>
-          <h2 className="text-2xl font-bold mb-2">Search Results</h2>
+          <h2 className="text-2xl text-white font-bold mb-2">Search Results</h2>
           {results.length > 0 ? (
             <ul>
               {results.map((result) => (
@@ -84,7 +84,7 @@ const SearchResults = ({ searchCriteria }) => {
               ))}
             </ul>
           ) : (
-            <p>No results found.</p>
+            <p className='text-red-500'>No results found.</p>
           )}
         </>
       )}
