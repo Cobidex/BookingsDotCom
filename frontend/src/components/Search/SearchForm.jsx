@@ -14,8 +14,9 @@ const SearchForm = ({ onSearch }) => {
   };
 
   return (
-    <div className="h-screen flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
-      <h2 className="text-2xl font-bold mb-2">Accommodation Search</h2>
+    //  md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0
+    <div className="h-screen flex flex-col">
+      <h2 className="text-2xl text-white font-bold mb-2">Accommodation Search</h2>
       <form onSubmit={handleSubmit}>
         <select
           value={searchType}
