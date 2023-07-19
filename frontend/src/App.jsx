@@ -3,6 +3,8 @@ import { Link, BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 // Sign up and sign in
 import SignIn from './components/signIn and signUp/SignIn'
 import SignUp from './components/signIn and signUp/SignUp'
+// home
+import Home from './components/Home'
 // search
 import AccommodationSearch from './components/Search/accommodationSearch'
 import SearchForm from './components/Search/SearchForm'
@@ -40,6 +42,7 @@ const App = () => {
           {/* <Route path='*' element={<App />} /> */}
           <Route path='/SignIn' element={<SignIn />} />
           <Route path='/SignUp' element={<SignUp />} />
+          <Route path='/home' element={<Home />} />
           <Route path='/accommodationSearch' element={<AccommodationSearch />} />
           <Route path='/SearchForm' element={<SearchForm />} />
           <Route path='/SearchResult' element={<SearchResults />} />
