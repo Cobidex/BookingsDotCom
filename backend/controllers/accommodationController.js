@@ -100,11 +100,14 @@ const searchAccommodations = async (req, res) => {
 
     const searchQuery = {
       where: {},
-      include: [City], // Include the City model for retrieving city details
     };
 
     if (location) {
-      searchQuery.where['$City.name$'] = location;
+      const city = await City.findOne({ where: { name: location } });
+      if (!city) {
+        return res.status(404).json({ error: 'City not found' });
+      }
+      searchQuery.where.cityId = city.id;
     }
 
     if (type) {
