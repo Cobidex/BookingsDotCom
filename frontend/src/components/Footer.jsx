@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 
 const Footer = () => {
@@ -19,4 +20,17 @@ const Footer = () => {
 };
 
 export default Footer;
+=======
+import React from 'react'
+//import videoBg from '../assets/pexels-joão-pedro-15854157 (1080p).mp4'
+
+const Footer = () => {
+  return (
+    <div>
+      <video src={videoBg} autoPlay loop muted
+      className=''/>
+    </div>
+  )
+}
+>>>>>>> abc502b7eee50b057f19eacd50e9a8c99ef00a31
 

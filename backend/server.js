@@ -1,4 +1,4 @@
-const app = require('express');
+import express from 'express';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import cors from 'cors';
@@ -9,7 +9,7 @@ import accommodationRoutes from './routes/accommodationRoutes.js';
 import bookingRoutes from './routes/bookingRoutes.js';
 import reviewRoutes from './routes/reviewRoutes.js';
 
-const app = express;
+const app = express();
 
 app.use(cors());
 

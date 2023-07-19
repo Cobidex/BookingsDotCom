@@ -18,11 +18,21 @@ import UserDashboard from './components/dashboard/UserDashboard'
 import BookingHistory from './components/dashboard/BookingHistory'
 import Footer from './components/dashboard/BookingHistory'
 
+import Footer from './components/Footer'
+import videoBg from './assets/pexels-joão-pedro-15854157 (1080p).mp4'
+
 
 const App = () => {
   return (
     <>
+<<<<<<< HEAD
       <div className='bg-[url("https://drive.google.com/file/d/1PG5AzdF16nRx2p9W0g_xnEVhXrulzARb/view?usp=sharing")] bg-cover min-h-screen'>
+=======
+     <video
+        className='absolute object-cover w-full h-full -z-10' 
+        src={videoBg} autoPlay loop muted/> 
+      <div className='backdrop-brightness-50'>
+>>>>>>> abc502b7eee50b057f19eacd50e9a8c99ef00a31
       {/*<div className='text-lg text-gray-500'>Hello everyone welcome to <span className='border-b-2 text-teal-500 shadow rounded-md text-2xl'>BookingsDotCom</span></div>*/}
       {/* <SignIn /> */}
       {/* <SignUp /> */}
@@ -39,7 +49,11 @@ const App = () => {
           <Route path='/ReviewList' element={<ReviewList />} />
           <Route path='/UserDashboard' element={<UserDashboard />} />
           <Route path='/BookingHistory' element={<BookingHistory />} />
+<<<<<<< HEAD
 	  <Route path='/Footer' element={<Footer />} />
+=======
+          <Route path='/Footer' element={<Footer />} />
+>>>>>>> abc502b7eee50b057f19eacd50e9a8c99ef00a31
         </Routes>
         </div>
     </>
