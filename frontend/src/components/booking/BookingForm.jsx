@@ -48,7 +48,7 @@ const BookingForm = () => {
         </p>
         <form onSubmit={handleFormSubmit}>
           <div className="mb-4">
-            <label htmlFor="checkIn" className="block text-gray-700 text-xl font-thin">
+            <label htmlFor="checkIn" className="block text-white text-xl font-thin">
               Check-in:
             </label>
             <input
@@ -61,7 +61,7 @@ const BookingForm = () => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="checkOut" className="block text-gray-700 text-xl font-thin">
+            <label htmlFor="checkOut" className="block text-white text-xl font-thin">
               Check-out:
             </label>
             <input
@@ -74,7 +74,7 @@ const BookingForm = () => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="accommodationId" className="block text-gray-700 text-xl font-thin">
+            <label htmlFor="accommodationId" className="block text-white text-xl font-thin">
               Accommodation ID:
             </label>
             <input
