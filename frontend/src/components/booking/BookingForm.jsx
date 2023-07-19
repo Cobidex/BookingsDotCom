@@ -43,7 +43,7 @@ const BookingForm = () => {
     <div className="flex flex-col justify-center items-center min-h-screen">
       <div className="max-w-md w-full mx-4 bg-gray-600/30 p-6 rounded-lg shadow-md border border-white backdrop-brightness-50">
         <p className='text-center text-2xl font-semibold text-teal-400 mb-4'>Book Accomodation</p>
-        <p className="text-white mb-4 font-thin text-lg">
+        <p className="text-white mb-4 font-thin text-lg md:text-center">
         Discover Your Ideal Getaway: Book Your Stay Now and Create Lasting Memories
         </p>
         <form onSubmit={handleFormSubmit}>
