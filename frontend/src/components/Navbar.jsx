@@ -1,4 +1,4 @@
-import React from 'react'
+{/*import React from 'react'
 
 
 const Navbar = () => {
@@ -16,4 +16,26 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default Navbar*/}
+
+import React from 'react';
+import { Link } from 'react-router-dom'; // Assuming you are using React Router for navigation.
+
+const Navbar = () => {
+  return (
+    <nav className="bg-teal-500 p-4 flex items-center justify-between">
+      {/* Logo on the left */}
+      <div className="text-white font-bold text-lg">Logo</div>
+
+      {/* Navigation links on the right */}
+      <div className="space-x-4">
+        <Link to="/" className="text-white hover:text-blue-200">Home</Link>
+        <Link to="/accommodation" className="text-white hover:text-blue-200">Accommodation</Link>
+        <Link to="/booking" className="text-white hover:text-blue-200">Booking</Link>
+        <Link to="/profile" className="text-white hover:text-blue-200">Profile</Link>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
