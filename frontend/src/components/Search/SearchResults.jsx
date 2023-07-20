@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+{/*import React, { useEffect, useState } from 'react';
 
 const SearchResults = ({ searchCriteria }) => {
   const [results, setResults] = useState([]);
@@ -53,6 +53,34 @@ const SearchResults = ({ searchCriteria }) => {
             <p className='text-red-500'>No results found.</p>
           )}
         </>
+      )}
+    </div>
+  );
+};
+
+export default SearchResults;*/}
+
+
+import React from 'react';
+
+const SearchResults = ({ results }) => {
+  return (
+    <div>
+      <h2>Search Results</h2>
+      {results.length === 0 ? (
+        <p>No results found.</p>
+      ) : (
+        <ul>
+          {results.map((accommodation) => (
+            <li key={accommodation.id}>
+              <h3>{accommodation.name}</h3>
+              <p>Location: {accommodation.City.name}</p>
+              <p>Description: {accommodation.description}</p>
+              <p>Price per Night: {accommodation.pricePerNight}</p>
+              <p>Type: {accommodation.type}</p>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );
