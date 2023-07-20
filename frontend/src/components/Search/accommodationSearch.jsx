@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+{/*import React, { useState } from 'react';
 import SearchForm from './SearchForm';
 import SearchResults from './SearchResults';
 
@@ -17,4 +17,4 @@ const AccommodationSearch = () => {
   );
 };
 
-export default AccommodationSearch;
+export default AccommodationSearch;*/}

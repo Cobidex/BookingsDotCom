@@ -1,5 +1,6 @@
 import React from 'react'
-import AccommodationSearch from './Search/AccommodationSearch'
+import SearchAccommodation from './Search/SearchAccommodation'
+//import AccommodationSearch from './Search/AccommodationSearch'
 //import Navbar from './Navbar'
 
 const Home = () => {
@@ -11,7 +12,7 @@ const Home = () => {
         <p className="text-lg text-white mb-6">
           Discover the best accommodations for your travel destinations. Use our powerful search fields to find your perfect stay.
         </p>
-        <AccommodationSearch />
+        <SearchAccommodation />
         <p className="text-lg text-white">
           Start your journey by entering your desired location, accommodation type, and price range in the search form above.
         </p>

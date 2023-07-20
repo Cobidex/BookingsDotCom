@@ -6,7 +6,7 @@ import SignUp from './components/signIn and signUp/SignUp'
 // home
 import Home from './components/Home'
 // search
-import AccommodationSearch from './components/Search/AccommodationSearch'
+//import AccommodationSearch from './components/Search/AccommodationSearch'
 import SearchForm from './components/Search/SearchForm'
 import SearchResults from './components/Search/SearchResults'
 // Bookings
@@ -23,6 +23,7 @@ import Footer from './components/Footer'
 
 import videoBg from './assets/pexels-joão-pedro-15854157 (1080p).mp4'
 import Navbar from './components/Navbar'
+import SearchAccommodation from './components/Search/SearchAccommodation'
 
 
 
@@ -39,7 +40,7 @@ const App = () => {
           <Route path='/SignIn' element={<SignIn />} />
           <Route path='/SignUp' element={<SignUp />} />
           <Route path='/home' element={<Home />} />
-          <Route path='/accommodationSearch' element={<AccommodationSearch />} />
+          <Route path='/SearchAccommodation' element={<SearchAccommodation />} />
           <Route path='/SearchForm' element={<SearchForm />} />
           <Route path='/SearchResult' element={<SearchResults />} />
           <Route path='/BookingForm' element={<BookingForm />} />
