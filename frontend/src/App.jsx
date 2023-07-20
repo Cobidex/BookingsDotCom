@@ -33,10 +33,12 @@ const App = () => {
       {/*<div className='text-lg text-gray-500'>Hello everyone welcome to <span className='border-b-2 text-teal-500 shadow rounded-md text-2xl'>BookingsDotCom</span></div>*/}
       {/* <SignIn /> */}
       {/* <SignUp /> */}
+      {/* <Home /> */}
         <Routes>
-          {/* <Route path='*' element={<App />} /> */}
+          {/* <Route path='/' element={<App />} /> */}
           <Route path='/SignIn' element={<SignIn />} />
           <Route path='/SignUp' element={<SignUp />} />
+          <Route path='/' element={<Home />} />
           <Route path='/home' element={<Home />} />
           <Route path='/accommodationSearch' element={<AccommodationSearch />} />
           <Route path='/SearchForm' element={<SearchForm />} />

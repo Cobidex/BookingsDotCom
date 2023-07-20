@@ -33,7 +33,7 @@ const ReviewForm = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-white">
+    <div className="flex flex-col justify-center items-center min-h-screen">
      <div className="max-w-md w-full mx-4 bg-gray-50 p-6 rounded-lg shadow-md border border-teal-500">
       <div>
         <p className='text-center text-2xl font-semibold text-gray-500 mb-4'>Leave a review</p>
