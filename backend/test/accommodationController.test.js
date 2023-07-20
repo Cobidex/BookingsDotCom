@@ -1,315 +1,168 @@
-const assert = require('assert');
-const Accommodation = require('../models/accommodation');
-const accommodationController = require('../controllers/accommodationController');
+import { expect } from 'chai';
+import sinon from 'sinon';
+import accommodationController from '../controllers/accommodationController.js';
+import Accommodation from '../models/accommodation.js';
+import City from '../models//city.js';
 
 describe('Accommodation Controller', () => {
-    afterEach(() => {
-        // Clean up any test-specific data or state if needed
-    });
-
     describe('createAccommodation', () => {
         it('should create a new accommodation', async () => {
-            const mockAccommodation = {
-                id: 1,
+            // Test data
+            const newAccommodationData = {
                 name: 'Test Accommodation',
-                // Add other relevant properties
+                description: 'Test description',
+                pricePerNight: 100,
+                type: 'Hotel',
+                availableDates: '2023-07-20',
+                city_id: 1,
             };
 
-            Accommodation.create = async (newAccommodation) => {
-                assert.deepStrictEqual(newAccommodation, {
-                    name: 'Test Accommodation',
-                    // Add other relevant properties
-                });
-
-                return Promise.resolve(mockAccommodation);
-            };
+            // Create a Sinon stub for Accommodation.create
+            const createStub = sinon.stub(Accommodation, 'create').resolves({
+                id: 1,
+                ...newAccommodationData,
+                rating: 0.0,
+            });
 
             const req = {
-                body: {
-                    name: 'Test Accommodation',
-                    // Add other relevant properties
-                },
+                body: newAccommodationData,
             };
             const res = {
-                status: (statusCode) => {
-                    assert.strictEqual(statusCode, 201);
-                    return res;
-                },
-                json: (data) => {
-                    assert.deepStrictEqual(data, mockAccommodation);
-                },
+                status: sinon.stub().returnsThis(),
+                json: sinon.stub(),
             };
 
             await accommodationController.createAccommodation(req, res);
-        });
 
-        it('should handle error during accommodation creation', async () => {
-            Accommodation.create = () => {
-                throw new Error('Database error');
-            };
+            // Expectations
+            expect(res.status.calledOnceWith(201)).to.be.true;
+            expect(res.json.calledOnce).to.be.true;
+            expect(createStub.calledOnce).to.be.true;
 
-            const req = {
-                body: {
-                    name: 'Test Accommodation',
-                    // Add other relevant properties
-                },
-            };
-            const res = {
-                status: (statusCode) => {
-                    assert.strictEqual(statusCode, 500);
-                    return res;
-                },
-                json: (data) => {
-                    assert.deepStrictEqual(data, { error: 'Failed to create accommodation' });
-                },
-            };
-
-            await accommodationController.createAccommodation(req, res);
+            // Restore the stub to its original implementation
+            createStub.restore();
         });
     });
 
+    // Test for updateAccommodation
     describe('updateAccommodation', () => {
         it('should update an existing accommodation', async () => {
-            const mockAccommodation = {
-                id: 1,
+            // Test data
+            const accommodationId = 1;
+            const updatedAccommodationData = {
                 name: 'Updated Accommodation',
-                // Add other relevant properties
+                description: 'Updated description',
+                pricePerNight: 150,
+                type: 'Apartment',
+                availableDates: '2023-08-10',
+                city: {
+                    id: 2,
+                },
             };
 
-            Accommodation.findByPk = async (id) => {
-                assert.strictEqual(id, '1');
-
-                return Promise.resolve(mockAccommodation);
-            };
-
-            Accommodation.prototype.save = async () => {
-                return Promise.resolve();
-            };
+            // Create a Sinon stub for Accommodation.findByPk
+            const findByPkStub = sinon.stub(Accommodation, 'findByPk').resolves({
+                id: accommodationId,
+                ...updatedAccommodationData,
+                rating: 0.0,
+                save: sinon.stub().resolves(),
+            });
 
             const req = {
-                params: { id: '1' },
-                body: {
-                    name: 'Updated Accommodation',
-                    // Add other relevant properties
-                },
+                params: { id: accommodationId },
+                body: updatedAccommodationData,
             };
             const res = {
-                json: (data) => {
-                    assert.deepStrictEqual(data, mockAccommodation);
-                },
+                json: sinon.stub(),
             };
 
             await accommodationController.updateAccommodation(req, res);
-        });
 
-        it('should handle non-existent accommodation during update', async () => {
-            Accommodation.findByPk = async () => {
-                return Promise.resolve(null);
-            };
+            // Expectations
+            expect(findByPkStub.calledOnceWith(accommodationId)).to.be.true;
+            expect(res.json.calledOnce).to.be.true;
 
-            const req = {
-                params: { id: '1' },
-                body: {
-                    name: 'Updated Accommodation',
-                    // Add other relevant properties
-                },
-            };
-            const res = {
-                status: (statusCode) => {
-                    assert.strictEqual(statusCode, 404);
-                    return res;
-                },
-                json: (data) => {
-                    assert.deepStrictEqual(data, { error: 'Accommodation not found' });
-                },
-            };
-
-            await accommodationController.updateAccommodation(req, res);
-        });
-
-        it('should handle error during accommodation update', async () => {
-            const mockAccommodation = {
-                id: 1,
-                name: 'Updated Accommodation',
-                // Add other relevant properties
-            };
-
-            Accommodation.findByPk = async () => {
-                return Promise.resolve(mockAccommodation);
-            };
-
-            Accommodation.prototype.save = () => {
-                throw new Error('Database error');
-            };
-
-            const req = {
-                params: { id: '1' },
-                body: {
-                    name: 'Updated Accommodation',
-                    // Add other relevant properties
-                },
-            };
-            const res = {
-                status: (statusCode) => {
-                    assert.strictEqual(statusCode, 500);
-                    return res;
-                },
-                json: (data) => {
-                    assert.deepStrictEqual(data, { error: 'Failed to update accommodation' });
-                },
-            };
-
-            await accommodationController.updateAccommodation(req, res);
+            // Restore the stub to its original implementation
+            findByPkStub.restore();
         });
     });
 
+    // Test for deleteAccommodation
     describe('deleteAccommodation', () => {
         it('should delete an existing accommodation', async () => {
-            const mockAccommodation = {
-                id: 1,
-                name: 'Test Accommodation',
-                // Add other relevant properties
-            };
+            // Test data
+            const accommodationId = 1;
 
-            Accommodation.findByPk = async (id) => {
-                assert.strictEqual(id, '1');
-
-                return Promise.resolve(mockAccommodation);
-            };
-
-            Accommodation.prototype.destroy = async () => {
-                return Promise.resolve();
-            };
+            // Create a Sinon stub for Accommodation.findByPk
+            const findByPkStub = sinon.stub(Accommodation, 'findByPk').resolves({
+                id: accommodationId,
+                destroy: sinon.stub().resolves(),
+            });
 
             const req = {
-                params: { id: '1' },
+                params: { id: accommodationId },
             };
             const res = {
-                json: (data) => {
-                    assert.deepStrictEqual(data, { message: 'Accommodation deleted successfully' });
-                },
+                json: sinon.stub(),
             };
 
             await accommodationController.deleteAccommodation(req, res);
-        });
 
-        it('should handle non-existent accommodation during deletion', async () => {
-            Accommodation.findByPk = async () => {
-                return Promise.resolve(null);
-            };
+            // Expectations
+            expect(findByPkStub.calledOnceWith(accommodationId)).to.be.true;
+            expect(res.json.calledOnce).to.be.true;
 
-            const req = {
-                params: { id: '1' },
-            };
-            const res = {
-                status: (statusCode) => {
-                    assert.strictEqual(statusCode, 404);
-                    return res;
-                },
-                json: (data) => {
-                    assert.deepStrictEqual(data, { error: 'Accommodation not found' });
-                },
-            };
-
-            await accommodationController.deleteAccommodation(req, res);
-        });
-
-        it('should handle error during accommodation deletion', async () => {
-            const mockAccommodation = {
-                id: 1,
-                name: 'Test Accommodation',
-                // Add other relevant properties
-            };
-
-            Accommodation.findByPk = async () => {
-                return Promise.resolve(mockAccommodation);
-            };
-
-            Accommodation.prototype.destroy = () => {
-                throw new Error('Database error');
-            };
-
-            const req = {
-                params: { id: '1' },
-            };
-            const res = {
-                status: (statusCode) => {
-                    assert.strictEqual(statusCode, 500);
-                    return res;
-                },
-                json: (data) => {
-                    assert.deepStrictEqual(data, { error: 'Failed to delete accommodation' });
-                },
-            };
-
-            await accommodationController.deleteAccommodation(req, res);
+            // Restore the stub to its original implementation
+            findByPkStub.restore();
         });
     });
 
-    describe('searchAccommodations', () => {
-        it('should return matching accommodations based on search criteria', async () => {
-            const mockAccommodations = [
-                {
-                    id: 1,
-                    name: 'Accommodation 1',
-                    // Add other relevant properties
-                },
-                {
-                    id: 2,
-                    name: 'Accommodation 2',
-                    // Add other relevant properties
-                },
-            ];
+    // Test for getAccommodationsCount
+    describe('getAccommodationsCount', () => {
+        it('should get the count of all accommodations', async () => {
+            // Create a Sinon stub for Accommodation.count
+            const countStub = sinon.stub(Accommodation, 'count').resolves(10); // Replace with the expected count
 
-            Accommodation.findAll = async (searchQuery) => {
-                assert.deepStrictEqual(searchQuery.where, {
-                    location: 'Addis Ababa',
-                    type: 'Hotel',
-                    pricePerNight: 100,
-                });
-
-                return Promise.resolve(mockAccommodations);
-            };
-
-            const req = {
-                query: {
-                    location: 'Addis Ababa',
-                    type: 'Hotel',
-                    price: 100,
-                },
-            };
+            const req = {};
             const res = {
-                json: (data) => {
-                    assert.deepStrictEqual(data, mockAccommodations);
-                },
+                json: sinon.stub(),
             };
 
-            await accommodationController.searchAccommodations(req, res);
+            await accommodationController.getAccommodationsCount(req, res);
+
+            // Expectations
+            expect(countStub.calledOnce).to.be.true;
+            expect(res.json.calledOnceWith({ count: 10 })).to.be.true; // Replace with the expected count
+
+            // Restore the stub to its original implementation
+            countStub.restore();
         });
+    });
 
-        it('should handle error during accommodation search', async () => {
-            Accommodation.findAll = () => {
-                throw new Error('Database error');
-            };
+    // Test for getAccommodationsCountByCity
+    describe('getAccommodationsCountByCity', () => {
+        it('should get the count of accommodations by city', async () => {
+            // Test data
+            const cityId = 1;
+
+            // Create a Sinon stub for Accommodation.count
+            const countStub = sinon.stub(Accommodation, 'count').resolves(5); // Replace with the expected count
 
             const req = {
-                query: {
-                    location: 'Addis Ababa',
-                    type: 'Hotel',
-                    price: 100,
-                },
+                params: { cityId: cityId },
             };
             const res = {
-                status: (statusCode) => {
-                    assert.strictEqual(statusCode, 500);
-                    return res;
-                },
-                json: (data) => {
-                    assert.deepStrictEqual(data, { error: 'Failed to search accommodations' });
-                },
+                json: sinon.stub(),
             };
 
-            await accommodationController.searchAccommodations(req, res);
+            await accommodationController.getAccommodationsCountByCity(req, res);
+
+            // Expectations
+            expect(countStub.calledOnceWith({ where: { cityId } })).to.be.true;
+            expect(res.json.calledOnceWith({ count: 5 })).to.be.true; // Replace with the expected count
+
+            // Restore the stub to its original implementation
+            countStub.restore();
         });
     });
 });

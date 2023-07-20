@@ -1,6 +1,7 @@
 import Booking from '../models/booking.js';
 import User from '../models/user.js';
 import Accommodation from '../models/accommodation.js';
+import { Op } from 'sequelize';
 
 const createBooking = async (req, res) => {
   const userId = req.user.userId
@@ -49,7 +50,7 @@ const createBooking = async (req, res) => {
 
 const cancelBooking = async (req, res) => {
   try {
-    const { bookingId } = req.params;
+    const bookingId = req.params.id;
 
     // Find the booking
     const booking = await Booking.findByPk(bookingId);
