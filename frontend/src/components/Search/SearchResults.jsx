@@ -42,8 +42,8 @@ const SearchResults = ({ searchCriteria }) => {
       // Perform API call or any data fetching logic here using the searchCriteria
 
       // Example API call
-      const response = await fetch('/api/accomodations/search', {
-        method: 'POST',
+      const response = await fetch('/api/accommodation/search', {
+        method: 'GET',
         body: JSON.stringify(searchCriteria),
         headers: {
           'Content-Type': 'application/json',

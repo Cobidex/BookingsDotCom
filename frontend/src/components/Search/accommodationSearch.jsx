@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import SearchForm from './SearchForm';
 import SearchResults from './SearchResults';
-import Navbar from '../Navbar';
 
 const AccommodationSearch = () => {
   const [searchCriteria, setSearchCriteria] = useState({});
