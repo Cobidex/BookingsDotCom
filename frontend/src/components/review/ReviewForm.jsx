@@ -34,15 +34,15 @@ const ReviewForm = () => {
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen">
-     <div className="max-w-md w-full mx-4 bg-gray-50 p-6 rounded-lg shadow-md border border-teal-500">
+     <div className="max-w-md w-full mx-4 bg-gray-600/30 p-6 rounded-lg shadow-md border border-white">
       <div>
-        <p className='text-center text-2xl font-semibold text-gray-500 mb-4'>Leave a review</p>
-        <p className='mb-4 text-gray-700 font-thin text-lg'>Share your experience and help others make informed decisions. Rate the accommodation on a scale of 1 to 5 and provide additional feedback in the comments.
+        <p className='text-center text-2xl font-semibold text-teal-400 mb-4'>Leave a review</p>
+        <p className='mb-4 text-white font-thin text-lg'>Share your experience and help others make informed decisions. Rate the accommodation on a scale of 1 to 5 and provide additional feedback in the comments.
            Your valuable review will contribute to a better community of travelers. Thank you for your input!</p>
       </div> 
     <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
       <div className="mb-4">
-        <label htmlFor="rating" className="text-gray-700 text-xl font-thin">Rating:</label>
+        <label htmlFor="rating" className="text-teal-400 text-xl font-thin">Rating:</label>
         <select
           id="rating"
           value={rating}
@@ -59,7 +59,7 @@ const ReviewForm = () => {
         </select>
       </div>
       <div className="mb-4">
-        <label htmlFor="text" className="text-gray-700 text-xl font-thin">Review Text:</label>
+        <label htmlFor="text" className="text-teal-400 text-xl font-thin">Review Text:</label>
         <textarea
           id="text"
           value={text}
