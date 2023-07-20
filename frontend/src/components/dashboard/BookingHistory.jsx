@@ -12,7 +12,7 @@ const BookingHistory = () => {
   // Function to fetch booking history data
   const getBookingHistory = async () => {
     try {
-      const response = await axios.get('/api/booking/history');
+      const response = await axios.post('/api/booking/history');
       setBookingHistory(response.data);
     } catch (error) {
       console.log('Error fetching booking history:', error);
