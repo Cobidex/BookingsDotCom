@@ -13,9 +13,6 @@ const Home = () => {
           Discover the best accommodations for your travel destinations. Use our powerful search fields to find your perfect stay.
         </p>
         <SearchAccommodation />
-        <p className="text-lg text-white">
-          Start your journey by entering your desired location, accommodation type, and price range in the search form above.
-        </p>
       </div>
     </div>
   )
