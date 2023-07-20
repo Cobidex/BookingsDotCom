@@ -73,7 +73,7 @@ const BookingForm = () => {
               required
             />
           </div>
-          <div className="mb-4">
+          {/*<div className="mb-4">
             <label htmlFor="accommodationId" className="block text-white text-xl font-thin">
               Accommodation ID:
             </label>
@@ -86,7 +86,7 @@ const BookingForm = () => {
               placeholder='Enter accommodation ID'
               required
             />
-          </div>
+  </div>*/}
           {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
           <button
             type="submit"
