@@ -1,5 +1,5 @@
 import React from 'react'
-import AccommodationSearch from './Search/accommodationSearch'
+import AccommodationSearch from './Search/AccommodationSearch'
 //import Navbar from './Navbar'
 
 const Home = () => {

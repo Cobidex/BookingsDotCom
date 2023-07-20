@@ -6,7 +6,7 @@ import SignUp from './components/signIn and signUp/SignUp'
 // home
 import Home from './components/Home'
 // search
-import AccommodationSearch from './components/Search/accommodationSearch'
+import AccommodationSearch from './components/Search/AccommodationSearch'
 import SearchForm from './components/Search/SearchForm'
 import SearchResults from './components/Search/SearchResults'
 // Bookings
