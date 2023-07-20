@@ -1,5 +1,6 @@
 import React from 'react'
 //import videoBg from '../assets/pexels-joão-pedro-15854157 (1080p).mp4'
+import footer from '../assets/footer.png'
 
 const Footer = () => {
   return (
@@ -9,7 +10,7 @@ const Footer = () => {
         <div class="md:flex md:justify-between">
           <div class="mb-6 md:mb-0">
               <a href="#" class="flex items-center">
-                  <img src="image goes here" class="h-8 mr-3" alt="BookingDotCom Logo" />
+                  <img src={footer} class="h-8 mr-3" alt="BookingDotCom Logo" />
                   <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">BookingDotCom</span>
               </a>
           </div>
