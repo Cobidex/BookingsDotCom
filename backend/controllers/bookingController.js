@@ -71,7 +71,30 @@ const cancelBooking = async (req, res) => {
   }
 };
 
+const getUserBookingHistory = async (req, res) => {
+  try {
+    const userId = req.user.userId;
+
+    // Check if the user exists
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Get the booking history for the specific user
+    const bookingHistory = await Booking.findAll({
+      where: { user_id: userId },
+    });
+
+    // Return the booking history in the response
+    res.json(bookingHistory);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch booking history' });
+  }
+};
+
 export default {
   createBooking,
   cancelBooking,
+  getUserBookingHistory,
 };
