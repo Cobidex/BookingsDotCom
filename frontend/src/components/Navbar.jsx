@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
-import SearchForm from './SearchForm';
-import SearchResults from './SearchResults';
+import React from 'react';
+import { Link } from 'react-router-dom'; // Assuming you are using React Router for navigation.
 
-const AccommodationSearch = () => {
-  const [searchCriteria, setSearchCriteria] = useState({});
-
-  const handleSearch = (criteria) => {
-    setSearchCriteria(criteria);
-  };
-
+const Navbar = () => {
   return (
-    <div>
-      <SearchForm onSearch={handleSearch} />
-      <SearchResults searchCriteria={searchCriteria} />
-    </div>
+    <nav className="bg-teal-500 p-4 flex items-center justify-between">
+      {/* Logo on the left */}
+      <div className="text-lg text-teal-500 font-serif bg-white rounded-md cursor-pointer p-1 shadow">BookingsDotCom</div>
+
+      {/* Navigation links on the right */}
+      <div className="space-x-8 bg-white p-2 rounded-md shadow text-lg font-semibold">
+        <Link to="/" className="text-teal-500 hover:border-b-2 border-teal-400">Home</Link>
+        {/*<Link to="/accommodation" className="text-teal-500 hover:border-b-2 border-teal-400 ">Accommodation</Link>*/}
+        <Link to="/BookingForm" className="text-teal-500 hover:border-b-2 border-teal-400">Booking</Link>
+        <Link to="/signin" className="text-teal-500 hover:border-b-2 border-teal-400">Profile</Link>
+        <Link to="/signup" className="hover:border-b-2 border-teal-400 bg-teal-500 text-white p-1 rounded-md shadow-md">Get Started</Link>
+      </div>
+    </nav>
   );
 };
 
-export default AccommodationSearch;
+export default Navbar;

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
-import Navbar from '../Navbar';
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState('')
@@ -51,8 +50,6 @@ const SignUp = () => {
   };
 
   return (
-    <>
-    <Navbar />
 <section className="h-screen flex flex-col md:flex-row justify-center space-y-10 md:space-y-0 md:space-x-16 items-center my-2 mx-5 md:mx-0 md:my-0">
 {/* sign up image */}
 {/* <div className="md:w-1/3 max-w-sm">
@@ -116,7 +113,6 @@ const SignUp = () => {
   </div>
 </div>
 </section>
-</>
   )
 }
 

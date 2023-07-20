@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import AccommodationSearch from './Search/accommodationSearch'
 //import Navbar from './Navbar'
 
@@ -17,10 +16,8 @@ const Home = () => {
           Start your journey by entering your desired location, accommodation type, and price range in the search form above.
         </p>
       </div>
-        <Footer />
     </div>
-    )
+  )
 }
 
 export default Home
-

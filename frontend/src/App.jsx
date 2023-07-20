@@ -1,23 +1,59 @@
 import React from 'react'
+import { Link, BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+// Sign up and sign in
+import SignIn from './components/signIn and signUp/SignIn'
+import SignUp from './components/signIn and signUp/SignUp'
+// home
+import Home from './components/Home'
+// search
 import AccommodationSearch from './components/Search/accommodationSearch'
-//import Navbar from './Navbar'
+import SearchForm from './components/Search/SearchForm'
+import SearchResults from './components/Search/SearchResults'
+// Bookings
+import BookingForm from './components/booking/BookingForm'
+import BookingDetails from './components/booking/BookingDetails'
+// Reviews
+import ReviewForm from './components/review/ReviewForm'
+import ReviewList from './components/review/ReviewList'
+//Dashboard
+import UserDashboard from './components/dashboard/UserDashboard'
+import BookingHistory from './components/dashboard/BookingHistory'
+import Footer from './components/Footer'
 
-const Home = () => {
+
+import videoBg from './assets/pexels-joão-pedro-15854157 (1080p).mp4'
+import Navbar from './components/Navbar'
+
+
+
+const App = () => {
   return (
-    <div className=" min-h-screen py-8">
-      {/*<Navbar />*/}
-      <div className="max-w-3xl mx-auto p-8">
-        <h1 className="text-4xl text-white font-bold mb-4">Welcome to <span className='text-teal-500 font-serif bg-white rounded-md cursor-pointer p-1 shadow-lg'>BookingsDotCom</span></h1>
-        <p className="text-lg text-white mb-6">
-          Discover the best accommodations for your travel destinations. Use our powerful search fields to find your perfect stay.
-        </p>
-        <AccommodationSearch />
-        <p className="text-lg text-white">
-          Start your journey by entering your desired location, accommodation type, and price range in the search form above.
-        </p>
-      </div>
-    </div>
+    <>
+	 <video
+	  className='absolute object-cover w-full min-h-screen -z-10 '
+	  src={videoBg} autoPlay loop muted/> 
+      <div className='backdrop-brightness-50 pt-5'>
+        <Navbar />
+       <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/SignIn' element={<SignIn />} />
+          <Route path='/SignUp' element={<SignUp />} />
+          <Route path='/home' element={<Home />} />
+          <Route path='/accommodationSearch' element={<AccommodationSearch />} />
+          <Route path='/SearchForm' element={<SearchForm />} />
+          <Route path='/SearchResult' element={<SearchResults />} />
+          <Route path='/BookingForm' element={<BookingForm />} />
+          <Route path='/BookingDetails' element={<BookingDetails />} />
+          <Route path='/ReviewForm' element={<ReviewForm />} />
+          <Route path='/ReviewList' element={<ReviewList />} />
+          <Route path='/UserDashboard' element={<UserDashboard />} />
+          <Route path='/BookingHistory' element={<BookingHistory />} />
+	        <Route path='/Footer' element={<Footer />} />
+        </Routes>
+        </div>
+        <Footer />
+    </>
   )
 }
 
-export default Home
+export default App
