@@ -6,8 +6,7 @@ const Navbar = () => {
   return (
     <nav className="bg-teal-500 p-4 flex items-center justify-between">
       {/* Logo on the left */}
-      {/* <div className="text-lg text-teal-500 font-serif bg-white rounded-md cursor-pointer p-1 shadow">BookingsDotCom</div> */}
-      <img src={logo} class="h-12 mr-3" alt="BookingDotCom Logo" />
+      <div className="text-lg text-teal-500 font-serif bg-white rounded-md cursor-pointer p-1 shadow"><img src={logo} class="h-10 mr-3" alt="BookingDotCom Logo" /></div>
 
       {/* Navigation links on the right */}
       <div className="space-x-8 bg-white p-2 rounded-md shadow text-lg font-semibold">
