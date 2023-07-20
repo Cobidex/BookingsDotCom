@@ -15,6 +15,8 @@ app.use(cors());
 
 const port = process.env.PORT || 5000;
 
+const host = process.env.BDC_HOST || 'localhost';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -32,6 +34,6 @@ app.get('*', (req, res) => {
   res.sendFile(join(__dirname, 'dist', 'index.html'));
 });
 
-app.listen(port, () => {
+app.listen(port, host, () => {
   console.log(`Server listening on port ${port}`);
 });

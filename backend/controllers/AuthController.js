@@ -15,7 +15,7 @@ class AuthController {
     }
 
     try {
-      const decoded = jwt.verify(token, secretKey);
+      const decoded = await jwt.verify(token, secretKey);
       req.user = decoded;
 
       next();
@@ -31,12 +31,12 @@ class AuthController {
     }
 
     try {
-      const decoded = jwt.verify(token, secretKey);
+      const decoded = await jwt.verify(token, secretKey);
       const admin = decoded.admin;
       if (admin) {
         next();
       } else {
-        return res.status(401).json({ error: 'Unauthorized' });
+        return res.status(401).json({ error: 'You are not Admin' });
       }
     } catch (err) {
       return res.status(401).json({ error: 'Invalid token' });
