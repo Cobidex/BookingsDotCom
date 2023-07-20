@@ -18,7 +18,7 @@ import ReviewList from './components/review/ReviewList'
 //Dashboard
 import UserDashboard from './components/dashboard/UserDashboard'
 import BookingHistory from './components/dashboard/BookingHistory'
-import Footer from './components/dashboard/BookingHistory'
+import Footer from './components/Footer'
 
 
 import videoBg from './assets/pexels-joão-pedro-15854157 (1080p).mp4'
@@ -50,6 +50,7 @@ const App = () => {
           <Route path='/BookingHistory' element={<BookingHistory />} />
         </Routes>
         </div>
+        <Footer />
     </>
   )
 }

@@ -7,6 +7,6 @@ import AuthController from '../controllers/AuthController.js';
 router.post('/create', AuthController.verifyAdmin, accommodationController.createAccommodation);
 router.put('/:id', AuthController.verifyAdmin, accommodationController.updateAccommodation);
 router.delete('/:id', AuthController.verifyAdmin, accommodationController.deleteAccommodation);
-router.get('/search', accommodationController.searchAccommodations);
+router.post('/search', accommodationController.searchAccommodations);
 
 export default router;
