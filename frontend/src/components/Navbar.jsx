@@ -25,14 +25,15 @@ const Navbar = () => {
   return (
     <nav className="bg-teal-500 p-4 flex items-center justify-between">
       {/* Logo on the left */}
-      <div className="text-white font-bold text-lg">Logo</div>
+      <div className="text-lg text-teal-500 font-serif bg-white rounded-md p-1 shadow">BookingsDotCom</div>
 
       {/* Navigation links on the right */}
-      <div className="space-x-4 bg-white p-2 rounded-md shadow text-lg font-semibold">
-        <Link to="signin" className="text-teal-500">Home</Link>
-        <Link to="/accommodation" className="text-teal-500 hover:text-blue-200 navg">Accommodation</Link>
-        <Link to="/BookingForm" className="text-teal-500">Booking</Link>
-        <Link to="/UserDashboard" className="text-teal-500">Profile</Link>
+      <div className="space-x-8 bg-white p-2 rounded-md shadow text-lg font-semibold">
+        <Link to="/" className="text-teal-500 hover:border-b-2 border-teal-400">Home</Link>
+        {/*<Link to="/accommodation" className="text-teal-500 hover:border-b-2 border-teal-400 ">Accommodation</Link>*/}
+        <Link to="/BookingForm" className="text-teal-500 hover:border-b-2 border-teal-400">Booking</Link>
+        <Link to="/UserDashboard" className="text-teal-500 hover:border-b-2 border-teal-400">Profile</Link>
+        <Link to="/signup" className="text-teal-500 hover:border-b-2 border-teal-400">Get Started</Link>
       </div>
     </nav>
   );
