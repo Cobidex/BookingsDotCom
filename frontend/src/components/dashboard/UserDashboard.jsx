@@ -22,7 +22,7 @@ const UserDashboard = () => {
   // Function to handle user profile update
   const handleProfileUpdate = async (updatedProfile) => {
     try {
-      const response = await axios.put('/api/users/edit', updatedProfile);
+      const response = await axios.put('/api/users/profile', updatedProfile);
       setUserProfile(response.data);
     } catch (error) {
       console.log('Error updating user profile:', error);
