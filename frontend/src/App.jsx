@@ -22,19 +22,19 @@ import Footer from './components/dashboard/BookingHistory'
 
 
 import videoBg from './assets/pexels-joão-pedro-15854157 (1080p).mp4'
+import Navbar from './components/Navbar'
+
 
 
 const App = () => {
   return (
     <>
 	 <video
-	  className='absolute object-cover w-full min-h-screen -z-10'
+	  className='absolute object-cover w-full min-h-screen -z-10 '
 	  src={videoBg} autoPlay loop muted/> 
-      <div className='backdrop-brightness-50'>
-      {/*<div className='text-lg text-gray-500'>Hello everyone welcome to <span className='border-b-2 text-teal-500 shadow rounded-md text-2xl'>BookingsDotCom</span></div>*/}
-      {/* <SignIn /> */}
-      {/* <SignUp /> */}
-        <Routes>
+      <div className='backdrop-brightness-50 pt-5'>
+        <Navbar />
+       <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/SignIn' element={<SignIn />} />
           <Route path='/SignUp' element={<SignUp />} />
