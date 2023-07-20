@@ -80,9 +80,4 @@ const ReviewForm = () => {
   );
 };
 
-<<<<<<< HEAD
-export default ReviewForm;
-
-=======
-export default ReviewForm;
->>>>>>> 84d523deece3a76d24a8eee82d4661dddf2458d0
+export default ReviewForm
