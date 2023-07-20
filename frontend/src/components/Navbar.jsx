@@ -32,7 +32,7 @@ const Navbar = () => {
         <Link to="/" className="text-teal-500 hover:border-b-2 border-teal-400">Home</Link>
         {/*<Link to="/accommodation" className="text-teal-500 hover:border-b-2 border-teal-400 ">Accommodation</Link>*/}
         <Link to="/BookingForm" className="text-teal-500 hover:border-b-2 border-teal-400">Booking</Link>
-        <Link to="/UserDashboard" className="text-teal-500 hover:border-b-2 border-teal-400">Profile</Link>
+        <Link to="/signin" className="text-teal-500 hover:border-b-2 border-teal-400">Profile</Link>
         <Link to="/signup" className="hover:border-b-2 border-teal-400 bg-teal-500 text-white p-1 rounded-md shadow-md">Get Started</Link>
       </div>
     </nav>
