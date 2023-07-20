@@ -96,7 +96,7 @@ const deleteAccommodation = async (req, res) => {
 
 const searchAccommodations = async (req, res) => {
   try {
-    const { location, type, price } = req.query;
+    const { location, type, price } = req.body;
 
     const searchQuery = {
       where: {},
