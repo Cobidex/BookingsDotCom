@@ -62,6 +62,8 @@ export default SearchResults;*/}
 
 
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 const SearchResults = ({ results }) => {
   return (
@@ -82,6 +84,7 @@ const SearchResults = ({ results }) => {
           ))}
         </ul>
       )}
+	
     </div>
   );
 };
