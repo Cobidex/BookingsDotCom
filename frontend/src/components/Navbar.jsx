@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Assuming you are using React Router for navigation.
+import { Link } from 'react-router-dom';
 import logo from '../assets/bookings_logo.png'
 
 const Navbar = () => {
