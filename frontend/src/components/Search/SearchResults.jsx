@@ -81,10 +81,12 @@ const SearchResults = ({ results }) => {
               <p>Type: {accommodation.type}</p>
               
             </li>
+            
           ))}
+          <Link to="/bookingform">Book Now</Link>
         </ul>
       )}
-      <Link to="/bookingform">Book Now</Link>
+      
     </div>
     
     
