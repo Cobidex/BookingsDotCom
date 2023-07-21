@@ -40,7 +40,7 @@ const SearchAccommodation = () => {
   return (
     <div>
       <SearchForm onSearch={handleSearch} />
-      {/*<SearchResults results={searchResults} />*/}
+      <SearchResults results={searchResults} />
     </div>
   );
 };
