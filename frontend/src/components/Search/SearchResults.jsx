@@ -64,6 +64,19 @@ export default SearchResults;*/}
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+const SearchResultItem = ({ accommodation }) => {
+  return (
+    <li key={accommodation.id}>
+      <h3>{accommodation.name}</h3>
+      <p>Location: {accommodation.City.name}</p>
+      <p>Description: {accommodation.description}</p>
+      <p>Price per Night: {accommodation.pricePerNight}</p>
+      <p>Type: {accommodation.type}</p>
+      <Link to="/bookingform">Book Now</Link>
+    </li>
+  );
+};
+
 const SearchResults = ({ results }) => {
   return (
     <div>
@@ -73,15 +86,7 @@ const SearchResults = ({ results }) => {
       ) : (
         <ul>
           {results.map((accommodation) => (
-            <li key={accommodation.id}>
-              <h3>{accommodation.name}</h3>
-              <p>Book Now</p>
-              <p>Location: {accommodation.City.name}</p>
-              <p>Description: {accommodation.description}</p>
-              <p>Price per Night: {accommodation.pricePerNight}</p>
-              <p>Type: {accommodation.type}</p>
-              <Link to="/bookingform">Book Now</Link>
-            </li>
+            <SearchResultItem key={accommodation.id} accommodation={accommodation} />
           ))}
         </ul>
       )}
