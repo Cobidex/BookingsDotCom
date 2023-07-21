@@ -67,7 +67,6 @@ import { Link } from 'react-router-dom';
 const SearchResults = ({ results }) => {
   return (
     <div className='grid grid-cols-2'>
-    <div>
       {/*<h2>Search Results</h2>*/}
       {results.length === 0 ? (
         <p></p>
@@ -80,14 +79,15 @@ const SearchResults = ({ results }) => {
               <p>Description: {accommodation.description}</p>
               <p>Price per Night: {accommodation.pricePerNight}</p>
               <p>Type: {accommodation.type}</p>
-              <Link to="/bookingform">Book Now</Link>
+              
             </li>
           ))}
         </ul>
       )}
+      <Link to="/bookingform">Book Now</Link>
     </div>
     
-    </div>
+    
   );
 };
 
