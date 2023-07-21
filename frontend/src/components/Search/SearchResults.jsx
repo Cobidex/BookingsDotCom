@@ -75,6 +75,7 @@ const SearchResults = ({ results }) => {
           {results.map((accommodation) => (
             <li key={accommodation.id}>
               <h3>{accommodation.name}</h3>
+              <p>Book Now</p>
               <p>Location: {accommodation.City.name}</p>
               <p>Description: {accommodation.description}</p>
               <p>Price per Night: {accommodation.pricePerNight}</p>
