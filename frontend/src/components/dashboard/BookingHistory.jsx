@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 
 const BookingHistory = () => {
   const [bookingHistory, setBookingHistory] = useState([]);
@@ -12,7 +12,7 @@ const BookingHistory = () => {
   // Function to fetch booking history data
   const getBookingHistory = async () => {
     try {
-      const response = await axios.post('/api/booking/history');
+      const response = await api.post('/booking/history');
       setBookingHistory(response.data);
     } catch (error) {
       console.log('Error fetching booking history:', error);

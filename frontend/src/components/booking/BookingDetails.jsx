@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../api';
 
 const BookingDetails = ({ bookingId }) => {
   const [booking, setBooking] = useState(null);
@@ -10,7 +10,7 @@ const BookingDetails = ({ bookingId }) => {
       setErrorMessage('');
 
       try {
-        const response = await axios.get(`/api/booking/${bookingId}`);
+        const response = await axios.get(`/booking/${bookingId}`);
 
         setBooking(response.data);
       } catch (error) {
