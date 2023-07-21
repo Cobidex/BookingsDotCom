@@ -21,6 +21,7 @@ const SearchAccommodation = () => {
 export default SearchAccommodation*/}
 
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import SearchForm from './SearchForm';
 import SearchResults from './SearchResults';
 
@@ -39,7 +40,7 @@ const SearchAccommodation = () => {
   return (
     <div>
       <SearchForm onSearch={handleSearch} />
-      <SearchResults results={searchResults} />
+      {/*<SearchResults results={searchResults} />*/}
     </div>
   );
 };
