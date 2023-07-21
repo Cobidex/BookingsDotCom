@@ -65,6 +65,7 @@ export default SearchForm;*/}
 
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const SearchAccommodation = () => {
   const [location, setLocation] = useState('');
@@ -114,12 +115,12 @@ const SearchAccommodation = () => {
         </div>
       </div>
       <div className="mt-4">
-        <button
+        <Link to='searchaccommodation'
           className="bg-teal-500 text-white px-4 py-2 rounded-md"
           onClick={handleSearch}
         >
           Search
-        </button>
+        </Link>
       </div>
       <div className="mt-4">
         {accommodations.map((accommodation) => (
