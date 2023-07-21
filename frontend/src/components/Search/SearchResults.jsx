@@ -69,7 +69,7 @@ const SearchResults = ({ results }) => {
     <div>
       {/*<h2>Search Results</h2>*/}
       {results.length === 0 ? (
-        <p>No search results found.</p>
+        <p></p>
       ) : (
         <ul>
           {results.map((accommodation) => (
@@ -79,8 +79,6 @@ const SearchResults = ({ results }) => {
               <p>Description: {accommodation.description}</p>
               <p>Price per Night: {accommodation.pricePerNight}</p>
               <p>Type: {accommodation.type}</p>
-              
-              {/* Book Now link */}
               <Link to="/bookingform">Book Now</Link>
             </li>
           ))}
@@ -91,4 +89,3 @@ const SearchResults = ({ results }) => {
 };
 
 export default SearchResults;
-
