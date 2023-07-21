@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../api';
 import { useNavigate } from 'react-router-dom';
 
 const BookingForm = () => {
@@ -15,7 +15,7 @@ const BookingForm = () => {
     setErrorMessage('');
 
     try {
-      const response = await axios.post('/api/booking/book', {
+      const response = await api.post('/booking/book', {
         checkIn,
         checkOut,
         accommodationId,

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import api from '../api';
+
 
 const UserDashboard = () => {
+  const navigate = useNavigate();
   const [userProfile, setUserProfile] = useState(null);
 
   // Fetch user profile data when the component mounts
@@ -12,17 +15,21 @@ const UserDashboard = () => {
   // Function to fetch user profile data
   const getUserProfile = async () => {
     try {
-      const response = await axios.get('/api/users/profile');
+      const response = await api.get('/users/profile');
       setUserProfile(response.data);
     } catch (error) {
-      console.log('Error fetching user profile:', error);
+      if (error.response && error.response.status === 401) {
+        navigate('/signin');
+      } else {
+        console.log('Error fetching user profile:', error);
+      }
     }
   };
 
   // Function to handle user profile update
   const handleProfileUpdate = async (updatedProfile) => {
     try {
-      const response = await axios.put('/api/users/profile', updatedProfile);
+      const response = await api.put('/users/profile', updatedProfile);
       setUserProfile(response.data);
     } catch (error) {
       console.log('Error updating user profile:', error);
@@ -32,7 +39,7 @@ const UserDashboard = () => {
   // Function to handle user account deletion
   const handleDeleteAccount = async () => {
     try {
-      await axios.delete('/api/users/delete');
+      await api.delete('/users/delete');
       // Optionally, you can redirect the user to a different page after account deletion
       // window.location.href = '/goodbye'; 
     } catch (error) {
