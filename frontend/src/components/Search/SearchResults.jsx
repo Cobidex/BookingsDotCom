@@ -71,10 +71,10 @@ const SearchResults = ({ results }) => {
       {results.length === 0 ? (
         <p></p>
       ) : (
-        <ul>
+        <ul className='text-white'>
           {results.map((accommodation) => (
-            <li key={accommodation.id}>
-              <h3>{accommodation.name}</h3>
+            <li key={accommodation.id} className=''>
+              <h3 className='text-2xl text-teal-400'>{accommodation.name}</h3>
               <p>Location: {accommodation.City.name}</p>
               <p>Description: {accommodation.description}</p>
               <p>Price per Night: {accommodation.pricePerNight}</p>
