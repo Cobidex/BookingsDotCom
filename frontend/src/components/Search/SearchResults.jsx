@@ -62,10 +62,11 @@ export default SearchResults;*/}
 
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const SearchResults = ({ results }) => {
   return (
-    <div>
+    <div className='grid grid-cols-2'>
       {/*<h2>Search Results</h2>*/}
       {results.length === 0 ? (
         <p></p>
@@ -82,6 +83,7 @@ const SearchResults = ({ results }) => {
           ))}
         </ul>
       )}
+      <Link to="/bookingform">Book Now</Link>
     </div>
   );
 };
