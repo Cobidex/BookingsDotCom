@@ -1,6 +1,7 @@
 import React from 'react'
 //import videoBg from '../assets/pexels-joão-pedro-15854157 (1080p).mp4'
 import footer from '../assets/footer.png'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
@@ -14,6 +15,18 @@ const Footer = () => {
                   <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">BookingDotCom</span>
               </a>
           </div>
+          <div className="">
+            <p className="flex items-center justify-center">
+                <span className="mr-4 text-white">Register for free</span>
+                <button
+                type="button"
+                className="inline-block rounded-full border-2 border-neutral-50 px-3 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-100 focus:border-neutral-100 focus:text-neutral-100 focus:outline-none focus:ring-0 active:border-neutral-200 active:text-neutral-200 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                data-te-ripple-init
+                data-te-ripple-color="light">
+                    <Link className="text-white text-lg font-semibold hover:underline hover:underline-offset-4" to="/SignUp">Sign up!</Link>
+                </button>
+            </p>
+            </div>
       </div>
       <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
       <div className="sm:flex sm:items-center sm:justify-between">
