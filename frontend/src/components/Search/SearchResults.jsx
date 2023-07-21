@@ -85,7 +85,7 @@ const SearchResults = ({ results }) => {
         </ul>
       )}
 
-      <Link to="/bookingform" className="bg-teal-500 text-white px-4 py-2 rounded-md">Book Now</Link>
+      <Link to="/bookingform" className="bg-teal-500 text-white px-4 py-2 rounded-md ml-5">Book Now</Link>
     </div>
   );
 };
