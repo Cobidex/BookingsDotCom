@@ -75,7 +75,7 @@ const SearchResults = ({ results }) => {
           {results.map((accommodation) => (
             <li key={accommodation.id} className=''>
               <h3 className='text-2xl text-teal-400'>{accommodation.name}</h3>
-              <p>Location: {accommodation.City.name}</p>
+              <p className='text-white'>Location: {accommodation.City.name}</p>
               <p>Description: {accommodation.description}</p>
               <p>Price per Night: {accommodation.pricePerNight}</p>
               <p>Type: {accommodation.type}</p>
