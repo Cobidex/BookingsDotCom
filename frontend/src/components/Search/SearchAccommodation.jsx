@@ -24,6 +24,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import SearchForm from './SearchForm';
 import SearchResults from './SearchResults';
+import axios from 'axios';
 
 const SearchAccommodation = () => {
   const [searchResults, setSearchResults] = useState([]);

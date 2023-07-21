@@ -62,26 +62,30 @@ export default SearchResults;*/}
 
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const SearchResults = ({ results }) => {
   return (
-    <div className='grid grid-cols-2'>
+    <div className='text-white'>
       {/*<h2>Search Results</h2>*/}
       {results.length === 0 ? (
         <p></p>
       ) : (
-        <ul>
+        <ul className='text-white'>
           {results.map((accommodation) => (
-            <li key={accommodation.id}>
-              <h3>{accommodation.name}</h3>
-              <p>Location: {accommodation.City.name}</p>
+            <li key={accommodation.id} className=''>
+              <h3 className='text-2xl text-teal-400'>{accommodation.name}</h3>
+              <p className='text-white'>Location: {accommodation.City.name}</p>
               <p>Description: {accommodation.description}</p>
               <p>Price per Night: {accommodation.pricePerNight}</p>
               <p>Type: {accommodation.type}</p>
+              
             </li>
           ))}
         </ul>
       )}
+
+      <Link to="/bookingform" className="bg-teal-500 text-white px-4 py-2 rounded-md ml-5">Book Now</Link>
     </div>
   );
 };
