@@ -65,7 +65,7 @@ import React from 'react';
 
 const SearchResults = ({ results }) => {
   return (
-    <div>
+    <div className='grid grid-cols-2'>
       {/*<h2>Search Results</h2>*/}
       {results.length === 0 ? (
         <p></p>
