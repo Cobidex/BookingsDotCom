@@ -115,12 +115,12 @@ const SearchAccommodation = () => {
         </div>
       </div>
       <div className="mt-4">
-        <Link to='/searchresults'
+        <button
           className="bg-teal-500 text-white px-4 py-2 rounded-md"
           onClick={handleSearch}
         >
           Search
-        </Link>
+        </button>
       </div>
       <div className="mt-4">
         {accommodations.map((accommodation) => (
