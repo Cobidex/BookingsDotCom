@@ -80,12 +80,13 @@ const SearchResults = ({ results }) => {
               <p>Description: {accommodation.description}</p>
               <p>Price per Night: {accommodation.pricePerNight}</p>
               <p>Type: {accommodation.type}</p>
+              <Link to="/bookingform">Book Now</Link>
             </li>
           ))}
         </ul>
       )}
     </div>
-    <Link to="/bookingform">Book Now</Link>
+    
     </div>
   );
 };
