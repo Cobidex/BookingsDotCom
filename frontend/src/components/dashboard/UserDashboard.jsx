@@ -71,7 +71,7 @@ const UserDashboard = () => {
         handleProfileUpdate(updatedProfile);
       }}>
         <label htmlFor="firstName" className='text-lg text-teal-400 font-thin block mb-2'>First Name:</label>
-        <input type="text" firstName="firstName" defaultValue={userProfile.firstname} className="w-full border border-gray-300 rounded py-2 px-3 mb-3" />
+        <input type="text" name="firstName" defaultValue={userProfile.firstname} className="w-full border border-gray-300 rounded py-2 px-3 mb-3" />
         <br />
         <label htmlFor="lastName" className="text-lg text-teal-400 font-thin block mb-2">Last Name:</label>
         <input type="text" name="lastName" defaultValue={userProfile.lastname} className="w-full border border-gray-300 rounded py-2 px-3 mb-3" />
