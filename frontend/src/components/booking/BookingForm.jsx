@@ -18,7 +18,7 @@ const BookingForm = () => {
       const response = await api.post('/booking/book', {
         checkIn,
         checkOut,
-        accommodationId,
+        accommodationId: 1,
       });
 
       if (response.status === 401) {

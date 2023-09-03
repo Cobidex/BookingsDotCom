@@ -10,7 +10,7 @@ const BookingDetails = ({ bookingId }) => {
       setErrorMessage('');
 
       try {
-        const response = await axios.get(`/booking/${bookingId}`);
+        const response = await api.get(`/booking/1`);
 
         setBooking(response.data);
       } catch (error) {
